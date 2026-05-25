@@ -21,14 +21,10 @@ const ROADMAP_SCHEMA = {
     whyReflection: { type: 'string' },
     startingPoint: {
       type: 'array',
-      minItems: 4,
-      maxItems: 5,
       items: { type: 'string' }
     },
     phases: {
       type: 'array',
-      minItems: 3,
-      maxItems: 3,
       items: {
         type: 'object',
         additionalProperties: false,
@@ -41,8 +37,6 @@ const ROADMAP_SCHEMA = {
     },
     dayOfEating: {
       type: 'array',
-      minItems: 4,
-      maxItems: 4,
       items: {
         type: 'object',
         additionalProperties: false,
@@ -55,14 +49,10 @@ const ROADMAP_SCHEMA = {
     },
     nonNegotiables: {
       type: 'array',
-      minItems: 3,
-      maxItems: 3,
       items: { type: 'string' }
     },
     cannotDo: {
       type: 'array',
-      minItems: 3,
-      maxItems: 3,
       items: { type: 'string' }
     },
     coachBridge: { type: 'string' },
