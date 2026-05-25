@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#FFF6F2">
+  <title>Custom 6-Week Summer Shred Roadmap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fff6f2;
+      --paper: #ffffff;
+      --ink: #251922;
+      --ink-soft: #6e5662;
+      --ink-faint: #9a7f8b;
+      --line: #f1d7da;
+      --coral: #f15f55;
+      --coral-deep: #cc3650;
+      --coral-soft: #fff0eb;
+      --teal: #147d75;
+      --teal-soft: #e8f7f4;
+      --lime: #d9ed6a;
+      --shadow: 0 16px 48px rgba(62, 32, 44, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        linear-gradient(180deg, rgba(255, 246, 242, 0.96), rgba(255, 255, 255, 0.95)),
+        repeating-linear-gradient(135deg, rgba(241, 95, 85, 0.06) 0 1px, transparent 1px 20px);
+      color: var(--ink);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+      padding: 18px 16px 42px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 4px 0 14px;
+    }
+
+    .brand {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      color: var(--coral-deep);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.19em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    h1 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 29px;
+      font-style: italic;
+      font-weight: 600;
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .step-count {
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink-soft);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 11px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .progress {
+      height: 7px;
+      background: rgba(241, 215, 218, 0.8);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 14.28%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--coral), var(--teal));
+      transition: width 0.22s ease;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(241, 215, 218, 0.9);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .screen {
+      display: none;
+      padding: 24px 20px 20px;
+    }
+
+    .screen.active {
+      display: block;
+      animation: rise 0.22s ease;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      font-size: 24px;
+      line-height: 1.08;
+      letter-spacing: 0;
+      margin-bottom: 8px;
+    }
+
+    .prompt {
+      color: var(--ink-soft);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .field {
+      margin-top: 18px;
+    }
+
+    .field:first-of-type {
+      margin-top: 0;
+    }
+
+    label.field-label,
+    .field-label {
+      display: block;
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 9px;
+    }
+
+    .choices {
+      display: grid;
+      gap: 9px;
+    }
+
+    .choices.two {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .choices.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .choice {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      width: 100%;
+      border: 1.5px solid transparent;
+      border-radius: 8px;
+      background: var(--coral-soft);
+      color: var(--ink-soft);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.2;
+      padding: 13px 10px;
+      text-align: center;
+      transition: transform 0.08s ease, border-color 0.14s ease, background 0.14s ease, color 0.14s ease, box-shadow 0.14s ease;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .choice input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .choice.selected {
+      background: var(--coral);
+      border-color: var(--coral);
+      color: #ffffff;
+      box-shadow: 0 10px 22px rgba(241, 95, 85, 0.24);
+    }
+
+    .choice.teal.selected {
+      background: var(--teal);
+      border-color: var(--teal);
+      box-shadow: 0 10px 22px rgba(20, 125, 117, 0.2);
+    }
+
+    .choice:active {
+      transform: scale(0.985);
+    }
+
+    .choice small {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      opacity: 0.82;
+      margin-top: 3px;
+    }
+
+    .choice-text {
+      display: block;
+      pointer-events: none;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      border: 1.5px solid transparent;
+      border-radius: 8px;
+      background: #fff1ec;
+      color: var(--ink);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 15px;
+      outline: none;
+      transition: border-color 0.14s ease, background 0.14s ease;
+    }
+
+    textarea {
+      min-height: 134px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: var(--coral);
+      background: #ffffff;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--ink-faint);
+      font-weight: 500;
+    }
+
+    .other-field {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .other-field.show {
+      display: block;
+    }
+
+    .range-wrap {
+      background: var(--teal-soft);
+      border: 1px solid rgba(20, 125, 117, 0.16);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .range-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .range-value {
+      color: var(--teal);
+      font-size: 32px;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal);
+    }
+
+    .scale {
+      display: flex;
+      justify-content: space-between;
+      color: var(--ink-soft);
+      font-size: 11px;
+      font-weight: 700;
+      margin-top: 7px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 10px;
+      padding: 14px;
+      border-top: 1px solid var(--line);
+      background: rgba(255, 250, 248, 0.92);
+    }
+
+    button {
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .back,
+    .next {
+      min-height: 50px;
+      padding: 0 16px;
+    }
+
+    .back {
+      flex: 0 0 38%;
+      background: transparent;
+      color: var(--ink-soft);
+      border: 1.5px solid var(--line);
+    }
+
+    .next {
+      flex: 1;
+      background: var(--ink);
+      color: #ffffff;
+      box-shadow: 0 12px 24px rgba(37, 25, 34, 0.18);
+    }
+
+    .back[disabled] {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    .error {
+      display: none;
+      color: var(--coral-deep);
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 12px;
+    }
+
+    .error.show {
+      display: block;
+    }
+
+    .loading {
+      display: none;
+      padding: 30px 22px;
+      text-align: center;
+    }
+
+    .loading.show {
+      display: block;
+    }
+
+    .loading-mark {
+      width: 46px;
+      height: 46px;
+      margin: 0 auto 14px;
+      border-radius: 50%;
+      border: 5px solid var(--coral-soft);
+      border-top-color: var(--teal);
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .results {
+      display: none;
+      padding: 0;
+    }
+
+    .results.show {
+      display: block;
+      animation: rise 0.25s ease;
+    }
+
+    .results-hero {
+      padding: 24px 20px 22px;
+      background: linear-gradient(135deg, var(--ink), #4c2537 60%, var(--coral-deep));
+      color: #ffffff;
+    }
+
+    .results-hero .eyebrow {
+      color: var(--lime);
+      margin-bottom: 8px;
+    }
+
+    .results-hero h2 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 35px;
+      font-style: italic;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .results-hero p {
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 14px;
+      max-width: 39rem;
+    }
+
+    .result-body {
+      padding: 20px;
+    }
+
+    .section {
+      border-bottom: 1px solid var(--line);
+      padding: 21px 0;
+    }
+
+    .section:first-child {
+      padding-top: 0;
+    }
+
+    .section:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .section h3 {
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .why-quote {
+      background: var(--coral-soft);
+      border-left: 5px solid var(--coral);
+      border-radius: 8px;
+      color: var(--ink);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 22px;
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1.18;
+      padding: 16px;
+      margin: 12px 0;
+    }
+
+    .body-copy {
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.58;
+      margin-top: 9px;
+    }
+
+    .body-copy strong {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: grid;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .bullet-list li {
+      position: relative;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.45;
+      padding-left: 18px;
+    }
+
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      left: 1px;
+      top: 0.62em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .phase-grid {
+      display: grid;
+      gap: 11px;
+      margin-top: 13px;
+    }
+
+    .phase {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 15px;
+      background: #ffffff;
+    }
+
+    .phase strong {
+      display: block;
+      color: var(--coral-deep);
+      font-size: 15px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .phase p {
+      color: var(--ink-soft);
+      font-size: 13.5px;
+      line-height: 1.52;
+    }
+
+    .day-plan {
+      display: grid;
+      gap: 9px;
+      margin-top: 13px;
+    }
+
+    .meal {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 11px;
+      border: 1px solid rgba(20, 125, 117, 0.16);
+      border-radius: 8px;
+      background: var(--teal-soft);
+      padding: 12px;
+    }
+
+    .meal span {
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .meal p {
+      color: var(--ink);
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .checks {
+      display: grid;
+      gap: 10px;
+      margin-top: 13px;
+    }
+
+    .check {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 10px;
+      align-items: start;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.42;
+    }
+
+    .box {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--teal);
+      border-radius: 5px;
+      background: #ffffff;
+    }
+
+    .fork {
+      border-radius: 8px;
+      padding: 16px;
+      background: #fffaf8;
+      border: 1px solid var(--line);
+    }
+
+    .micro {
+      color: var(--ink-soft);
+      font-size: 13.5px;
+      line-height: 1.56;
+      margin-top: 12px;
+    }
+
+    .restart {
+      display: none;
+      width: 100%;
+      min-height: 50px;
+      margin-top: 18px;
+      background: var(--teal);
+      color: #ffffff;
+    }
+
+    .results.show + .restart {
+      display: block;
+    }
+
+    .fine-print {
+      color: var(--ink-faint);
+      font-size: 11.5px;
+      line-height: 1.45;
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    @media (max-width: 420px) {
+      body {
+        padding: 14px 12px 34px;
+      }
+
+      h1 {
+        font-size: 25px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      .screen {
+        padding: 21px 15px 18px;
+      }
+
+      .choices.two,
+      .choices.three {
+        grid-template-columns: 1fr;
+      }
+
+      .choice {
+        min-height: 50px;
+      }
+
+      .nav {
+        padding: 12px;
+      }
+
+      .back {
+        flex-basis: 34%;
+      }
+
+      .result-body,
+      .results-hero {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .results-hero h2 {
+        font-size: 30px;
+      }
+
+      .meal {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar">
+      <div class="brand">
+        <div class="eyebrow">Summer Shred</div>
+        <h1>Custom 6-Week Roadmap</h1>
+      </div>
+      <div class="step-count" id="step-count">1 / 6</div>
+    </div>
+
+    <div class="progress" aria-hidden="true"><span id="progress-fill"></span></div>
+
+    <section class="panel" id="tool">
+      <form id="roadmap-form">
+        <div class="screen active" data-screen="0">
+          <h2>In the next 6 weeks, what do you most want?</h2>
+          <p class="prompt">Pick the thing that would make this summer feel different.</p>
+          <div class="choices" data-group="goal">
+            <label class="choice">
+              <input type="radio" name="goal" value="Down 10-20 lbs">
+              <span class="choice-text">Down 10-20 lbs</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="goal" value="Clothes fit better">
+              <span class="choice-text">Clothes fit better</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="goal" value="Feel good in summer clothes">
+              <span class="choice-text">Feel good in summer clothes</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="goal" value="Tone up and look firmer">
+              <span class="choice-text">Tone up and look firmer</span>
+            </label>
+            <label class="choice teal">
+              <input type="radio" name="goal" value="Have more energy and feel like myself again">
+              <span class="choice-text">Have more energy</span>
+            </label>
+            <label class="choice teal">
+              <input type="radio" name="goal" value="All of the above">
+              <span class="choice-text">All of the above</span>
+            </label>
+          </div>
+          <div class="error" data-error>Pick one before moving on.</div>
+        </div>
+
+        <div class="screen" data-screen="1">
+          <h2>What does real life look like right now?</h2>
+          <p class="prompt">This is what keeps the plan grounded instead of cute-but-useless.</p>
+          <div class="field">
+            <span class="field-label">Age range</span>
+            <div class="choices three" data-group="ageRange">
+              <label class="choice">
+                <input type="radio" name="ageRange" value="18-24">
+                <span class="choice-text">18-24</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="ageRange" value="25-34">
+                <span class="choice-text">25-34</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="ageRange" value="35-44">
+                <span class="choice-text">35-44</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="ageRange" value="45-54">
+                <span class="choice-text">45-54</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="ageRange" value="55+">
+                <span class="choice-text">55+</span>
+              </label>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Life context</span>
+            <div class="choices" data-group="context">
+              <label class="choice">
+                <input type="checkbox" name="context" value="kids at home">
+                <span class="choice-text">Kids at home</span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="context" value="no kids at home">
+                <span class="choice-text">No kids at home</span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="context" value="full-time job, mostly sitting">
+                <span class="choice-text">Full-time job <small>mostly sitting</small></span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="context" value="on your feet most of the day">
+                <span class="choice-text">On your feet <small>most of the day</small></span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="context" value="shift work or inconsistent schedule">
+                <span class="choice-text">Shift work <small>inconsistent schedule</small></span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="context" value="caring for other people">
+                <span class="choice-text">Caring for others</span>
+              </label>
+              <label class="choice teal">
+                <input type="checkbox" name="context" value="Other">
+                <span class="choice-text">Other</span>
+              </label>
+            </div>
+            <input class="other-field" id="context-other" type="text" placeholder="A few words about real life right now">
+          </div>
+          <div class="error" data-error>Choose an age range and at least one life-context box.</div>
+        </div>
+
+        <div class="screen" data-screen="2">
+          <h2>What can you actually do each week?</h2>
+          <p class="prompt">Not your fantasy schedule. The one you could still do on a messy week.</p>
+          <div class="field">
+            <label class="field-label" for="days">Workout days</label>
+            <div class="range-wrap">
+              <div class="range-head">
+                <span>Realistic days per week</span>
+                <strong class="range-value" id="days-value">3</strong>
+              </div>
+              <input id="days" name="days" type="range" min="1" max="6" value="3">
+              <div class="scale"><span>1</span><span>6</span></div>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Where</span>
+            <div class="choices three" data-group="location">
+              <label class="choice">
+                <input type="radio" name="location" value="home">
+                <span class="choice-text">Home</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="location" value="gym">
+                <span class="choice-text">Gym</span>
+              </label>
+              <label class="choice teal">
+                <input type="radio" name="location" value="home or gym">
+                <span class="choice-text">Both</span>
+              </label>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Workout length</span>
+            <div class="choices three" data-group="sessionLength">
+              <label class="choice">
+                <input type="radio" name="sessionLength" value="15">
+                <span class="choice-text">15 min</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="sessionLength" value="30">
+                <span class="choice-text">30 min</span>
+              </label>
+              <label class="choice teal">
+                <input type="radio" name="sessionLength" value="45">
+                <span class="choice-text">45+ min</span>
+              </label>
+            </div>
+          </div>
+          <div class="error" data-error>Pick where you will train and how long sessions can be.</div>
+        </div>
+
+        <div class="screen" data-screen="3">
+          <h2>What usually knocks you off track?</h2>
+          <p class="prompt">This is the part the roadmap has to protect you from.</p>
+          <div class="choices" data-group="derailers">
+            <label class="choice">
+              <input type="checkbox" name="derailers" value="evenings get too busy">
+              <span class="choice-text">Evenings get too busy</span>
+            </label>
+            <label class="choice">
+              <input type="checkbox" name="derailers" value="too tired after work">
+              <span class="choice-text">Too tired after work</span>
+            </label>
+            <label class="choice">
+              <input type="checkbox" name="derailers" value="nighttime cravings">
+              <span class="choice-text">Nighttime cravings</span>
+            </label>
+            <label class="choice">
+              <input type="checkbox" name="derailers" value="weekends blow me up">
+              <span class="choice-text">Weekends blow me up</span>
+            </label>
+            <label class="choice">
+              <input type="checkbox" name="derailers" value="all-or-nothing mindset">
+              <span class="choice-text">All-or-nothing mindset</span>
+            </label>
+            <label class="choice">
+              <input type="checkbox" name="derailers" value="not knowing what to eat">
+              <span class="choice-text">Not knowing what to eat</span>
+            </label>
+            <label class="choice teal">
+              <input type="checkbox" name="derailers" value="Other">
+              <span class="choice-text">Other</span>
+            </label>
+          </div>
+          <input class="other-field" id="derailers-other" type="text" placeholder="What else gets in the way?">
+          <div class="error" data-error>Choose at least one derailer.</div>
+        </div>
+
+        <div class="screen" data-screen="4">
+          <h2>What have you tried that did not stick?</h2>
+          <p class="prompt">And how ready are you to give yourself the next 6 weeks?</p>
+          <div class="field">
+            <span class="field-label">Past attempts</span>
+            <div class="choices" data-group="history">
+              <label class="choice">
+                <input type="checkbox" name="history" value="WW or tracking apps">
+                <span class="choice-text">WW or tracking apps</span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="history" value="keto or low-carb">
+                <span class="choice-text">Keto or low-carb</span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="history" value="fasting">
+                <span class="choice-text">Fasting</span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="history" value="random workouts from social media">
+                <span class="choice-text">Random workouts from social</span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="history" value="just eating less">
+                <span class="choice-text">Just eating less</span>
+              </label>
+              <label class="choice teal">
+                <input type="checkbox" name="history" value="Other">
+                <span class="choice-text">Other</span>
+              </label>
+            </div>
+            <input class="other-field" id="history-other" type="text" placeholder="What else have you tried?">
+          </div>
+          <div class="field">
+            <label class="field-label" for="readiness">Readiness</label>
+            <div class="range-wrap">
+              <div class="range-head">
+                <span>1-10 commitment level</span>
+                <strong class="range-value" id="readiness-value">7</strong>
+              </div>
+              <input id="readiness" name="readiness" type="range" min="1" max="10" value="7">
+              <div class="scale"><span>1</span><span>10</span></div>
+            </div>
+          </div>
+          <div class="error" data-error>Choose at least one thing you have tried.</div>
+        </div>
+
+        <div class="screen" data-screen="5">
+          <h2>Why now?</h2>
+          <p class="prompt">Say it the way you would text a friend. This is what makes your roadmap feel like yours.</p>
+          <div class="field">
+            <label class="field-label" for="first-name">First name</label>
+            <input id="first-name" name="firstName" type="text" placeholder="Alex">
+          </div>
+          <div class="field">
+            <label class="field-label" for="why">In your own words</label>
+            <textarea id="why" name="why" placeholder="I joined because I am tired of restarting every Monday and I want to feel confident in summer clothes again."></textarea>
+          </div>
+          <div class="error" data-error>Give this at least one honest sentence.</div>
+        </div>
+      </form>
+
+      <div class="loading" id="loading">
+        <div class="loading-mark"></div>
+        <h2>Building your roadmap...</h2>
+        <p class="prompt">Turning your answers into a 6-week plan you can actually run.</p>
+      </div>
+
+      <article class="results" id="results" aria-live="polite"></article>
+
+      <div class="nav" id="nav">
+        <button class="back" type="button" id="back" disabled>Back</button>
+        <button class="next" type="button" id="next">Next</button>
+      </div>
+    </section>
+
+    <button class="restart" type="button" id="restart">Edit Answers</button>
+
+    <p class="fine-print">Educational fitness and nutrition guidance only. If you are pregnant, breastfeeding, injured, managing a medical condition, or recovering from illness or surgery, work with a qualified professional.</p>
+  </main>
+
+  <script>
+    const totalScreens = 6;
+    let currentScreen = 0;
+
+    const form = document.getElementById('roadmap-form');
+    const screens = Array.from(document.querySelectorAll('.screen'));
+    const progressFill = document.getElementById('progress-fill');
+    const stepCount = document.getElementById('step-count');
+    const backButton = document.getElementById('back');
+    const nextButton = document.getElementById('next');
+    const nav = document.getElementById('nav');
+    const results = document.getElementById('results');
+    const loading = document.getElementById('loading');
+    const restart = document.getElementById('restart');
+
+    const days = document.getElementById('days');
+    const daysValue = document.getElementById('days-value');
+    const readiness = document.getElementById('readiness');
+    const readinessValue = document.getElementById('readiness-value');
+
+    function updateRangeLabels() {
+      daysValue.textContent = days.value;
+      readinessValue.textContent = readiness.value;
+    }
+
+    days.addEventListener('input', updateRangeLabels);
+    readiness.addEventListener('input', updateRangeLabels);
+
+    function syncChoices() {
+      document.querySelectorAll('.choice input').forEach(function(input) {
+        input.closest('.choice').classList.toggle('selected', input.checked);
+      });
+
+      toggleOther('context', 'context-other');
+      toggleOther('derailers', 'derailers-other');
+      toggleOther('history', 'history-other');
+    }
+
+    function toggleOther(name, id) {
+      const other = document.getElementById(id);
+      const checked = Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).some(function(input) {
+        return input.value === 'Other';
+      });
+      other.classList.toggle('show', checked);
+      if (!checked) other.value = '';
+    }
+
+    document.querySelectorAll('.choice input').forEach(function(input) {
+      input.addEventListener('change', syncChoices);
+    });
+
+    function setScreen(index) {
+      currentScreen = index;
+      screens.forEach(function(screen, screenIndex) {
+        screen.classList.toggle('active', screenIndex === index);
+        screen.querySelector('[data-error]')?.classList.remove('show');
+      });
+      progressFill.style.width = (((index + 1) / totalScreens) * 100) + '%';
+      stepCount.textContent = (index + 1) + ' / ' + totalScreens;
+      backButton.disabled = index === 0;
+      nextButton.textContent = index === totalScreens - 1 ? 'Build My Roadmap' : 'Next';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function valuesFor(name) {
+      return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map(function(input) {
+        return input.value;
+      });
+    }
+
+    function radioValue(name) {
+      const input = document.querySelector('input[name="' + name + '"]:checked');
+      return input ? input.value : '';
+    }
+
+    function withOther(list, id) {
+      const output = list.filter(function(item) {
+        return item !== 'Other';
+      });
+      const other = document.getElementById(id).value.trim();
+      if (other) output.push(other);
+      return output;
+    }
+
+    function showError() {
+      screens[currentScreen].querySelector('[data-error]')?.classList.add('show');
+    }
+
+    function validateScreen(index) {
+      if (index === 0) return Boolean(radioValue('goal'));
+      if (index === 1) return Boolean(radioValue('ageRange')) && withOther(valuesFor('context'), 'context-other').length > 0;
+      if (index === 2) return Boolean(radioValue('location')) && Boolean(radioValue('sessionLength'));
+      if (index === 3) return withOther(valuesFor('derailers'), 'derailers-other').length > 0;
+      if (index === 4) return withOther(valuesFor('history'), 'history-other').length > 0;
+      if (index === 5) return document.getElementById('why').value.trim().length >= 18;
+      return true;
+    }
+
+    function collectData() {
+      return {
+        firstName: clean(document.getElementById('first-name').value.trim()) || 'You',
+        why: clean(document.getElementById('why').value.trim()),
+        goal: radioValue('goal'),
+        ageRange: radioValue('ageRange'),
+        context: withOther(valuesFor('context'), 'context-other'),
+        days: Number(days.value),
+        location: radioValue('location'),
+        sessionLength: Number(radioValue('sessionLength')),
+        derailers: withOther(valuesFor('derailers'), 'derailers-other'),
+        history: withOther(valuesFor('history'), 'history-other'),
+        readiness: Number(readiness.value)
+      };
+    }
+
+    function clean(text) {
+      return text.replace(/[<>]/g, '').replace(/\s+/g, ' ').trim();
+    }
+
+    function escapeHTML(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function renderList(items) {
+      return (items || []).map(function(item) {
+        return '<li>' + escapeHTML(item) + '</li>';
+      }).join('');
+    }
+
+    function renderPhases(phases) {
+      return (phases || []).map(function(phase) {
+        return '<div class="phase"><strong>' + escapeHTML(phase.title) + '</strong><p>' + escapeHTML(phase.body) + '</p></div>';
+      }).join('');
+    }
+
+    function renderMeals(meals) {
+      return (meals || []).map(function(meal) {
+        return '<div class="meal"><span>' + escapeHTML(meal.label) + '</span><p>' + escapeHTML(meal.body) + '</p></div>';
+      }).join('');
+    }
+
+    function renderChecks(items) {
+      return (items || []).map(function(item) {
+        return '<div class="check"><span class="box"></span><span>' + escapeHTML(item) + '</span></div>';
+      }).join('');
+    }
+
+    function buildRoadmap(data, roadmap) {
+      return `
+        <div class="results-hero">
+          <div class="eyebrow">Your roadmap</div>
+          <h2>${escapeHTML(roadmap.hero)}</h2>
+          <p>You do not need a perfect life to run this. You need a plan built around the life you actually have.</p>
+        </div>
+        <div class="result-body">
+          <section class="section">
+            <h3>Your Why, In Your Words</h3>
+            <div class="why-quote">"${escapeHTML(roadmap.whyQuote || data.why)}"</div>
+            <p class="body-copy">${escapeHTML(roadmap.whyReflection)}</p>
+          </section>
+
+          <section class="section">
+            <h3>Your Summer Shred Starting Point</h3>
+            <ul class="bullet-list">${renderList(roadmap.startingPoint)}</ul>
+          </section>
+
+          <section class="section">
+            <h3>Your Custom 6-Week Summer Shred Roadmap</h3>
+            <div class="phase-grid">${renderPhases(roadmap.phases)}</div>
+          </section>
+
+          <section class="section">
+            <h3>Sample Summer Shred Day Of Eating</h3>
+            <div class="day-plan">${renderMeals(roadmap.dayOfEating)}</div>
+          </section>
+
+          <section class="section">
+            <h3>Your 3 Non-Negotiables For This Shred</h3>
+            <div class="checks">${renderChecks(roadmap.nonNegotiables)}</div>
+          </section>
+
+          <section class="section">
+            <div class="fork">
+              <h3>What This Roadmap Can't Do For You</h3>
+              <ul class="bullet-list">${renderList(roadmap.cannotDo)}</ul>
+              <p class="body-copy">${escapeHTML(roadmap.coachBridge)}</p>
+            </div>
+          </section>
+
+          <section class="section">
+            <h3>Back In The Challenge</h3>
+            <p class="micro">${escapeHTML(roadmap.dmBridge)}</p>
+          </section>
+        </div>
+      `;
+    }
+
+    async function generateRoadmap(data) {
+      const response = await fetch('/api/roadmap', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const payload = await response.json().catch(function() {
+        return {};
+      });
+
+      if (!response.ok) {
+        const error = new Error(payload.message || 'The roadmap AI could not generate a plan right now.');
+        error.code = payload.error || 'request_failed';
+        throw error;
+      }
+
+      return payload.roadmap;
+    }
+
+    function buildUnavailableMessage(error) {
+      const setupCopy = error.code === 'missing_api_key'
+        ? 'The AI endpoint is installed, but ANTHROPIC_API_KEY has not been added to this Vercel project yet.'
+        : 'The AI endpoint is connected, but it could not generate the roadmap right now.';
+
+      return `
+        <div class="results-hero">
+          <div class="eyebrow">Setup needed</div>
+          <h2>The roadmap AI is not connected yet.</h2>
+          <p>${escapeHTML(setupCopy)}</p>
+        </div>
+        <div class="result-body">
+          <section class="section">
+            <h3>What to do next</h3>
+            <p class="body-copy">Add the Claude API key as <strong>ANTHROPIC_API_KEY</strong> in Vercel, redeploy, and this page will generate the custom roadmap from the answers instead of showing this setup message.</p>
+          </section>
+        </div>
+      `;
+    }
+
+    backButton.addEventListener('click', function() {
+      if (currentScreen > 0) setScreen(currentScreen - 1);
+    });
+
+    nextButton.addEventListener('click', async function() {
+      if (!validateScreen(currentScreen)) {
+        showError();
+        return;
+      }
+
+      if (currentScreen < totalScreens - 1) {
+        setScreen(currentScreen + 1);
+        return;
+      }
+
+      const data = collectData();
+      form.style.display = 'none';
+      nav.style.display = 'none';
+      loading.classList.add('show');
+      stepCount.textContent = 'Done';
+      progressFill.style.width = '100%';
+
+      try {
+        const roadmap = await generateRoadmap(data);
+        loading.classList.remove('show');
+        results.innerHTML = buildRoadmap(data, roadmap);
+        results.classList.add('show');
+        restart.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (error) {
+        loading.classList.remove('show');
+        results.innerHTML = buildUnavailableMessage(error);
+        results.classList.add('show');
+        restart.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+
+    restart.addEventListener('click', function() {
+      results.classList.remove('show');
+      results.innerHTML = '';
+      restart.style.display = 'none';
+      form.style.display = 'block';
+      nav.style.display = 'flex';
+      setScreen(0);
+    });
+
+    updateRangeLabels();
+    syncChoices();
+    setScreen(0);
+  </script>
+</body>
+</html>
