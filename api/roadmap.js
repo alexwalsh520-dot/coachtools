@@ -12,6 +12,7 @@ const ROADMAP_SCHEMA = {
     'dayOfEating',
     'nonNegotiables',
     'cannotDo',
+    'coachCanDo',
     'coachBridge',
     'dmBridge'
   ],
@@ -28,10 +29,13 @@ const ROADMAP_SCHEMA = {
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['title', 'body'],
+        required: ['title', 'bullets'],
         properties: {
           title: { type: 'string' },
-          body: { type: 'string' }
+          bullets: {
+            type: 'array',
+            items: { type: 'string' }
+          }
         }
       }
     },
@@ -52,6 +56,10 @@ const ROADMAP_SCHEMA = {
       items: { type: 'string' }
     },
     cannotDo: {
+      type: 'array',
+      items: { type: 'string' }
+    },
+    coachCanDo: {
       type: 'array',
       items: { type: 'string' }
     },
@@ -81,8 +89,12 @@ Plan rules:
 - Use her realistic workout days, location, and session length.
 - Structure exactly 3 phases: Weeks 1-2, Weeks 3-4, Weeks 5-6.
 - Include walking, simple strength progression, one simple food rule, protein-first guidance, a weekly check-in ritual, a sample day of eating, and 3 checkbox-style non-negotiables.
+- For each phase, return 4-5 short bullet strings. Do not put the whole phase in one paragraph.
 - If readiness is low, make the plan smaller and more confidence-building.
 - If weekends, cravings, low energy, or busy evenings are selected, reflect that in the plan.
+- For cannotDo, write 3 bullets about what a static roadmap cannot do for her.
+- For coachCanDo, write 3 bullets about what coaching can do: keep her accountable, adjust the plan when life changes, and help her recover quickly when she slips. Keep it clear and useful, not pitchy.
+- coachBridge should connect the two lists in 2-3 sentences: the plan is valuable, but coaching helps her implement it when the hardest moments happen.
 - Keep the DM bridge consistent: "When you're chatting with us in your Instagram DMs about the challenge, if you decide you want help actually running this roadmap for the next 6 weeks, just mention it so we know to talk through that option with you."
 
 Return only JSON matching the schema.
