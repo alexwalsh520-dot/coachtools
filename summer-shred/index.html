@@ -791,7 +791,7 @@
     <div class="topbar">
       <div class="brand">
         <div class="eyebrow">Custom 6-Week Roadmap</div>
-        <h1>Lucy's Summer Shred</h1>
+        <h1 id="main-title">Lucy's Summer Shred</h1>
       </div>
       <div class="step-count" id="step-count">1 / 6</div>
     </div>
@@ -1057,6 +1057,7 @@
     const nav = document.getElementById('nav');
     const results = document.getElementById('results');
     const loading = document.getElementById('loading');
+    const mainTitle = document.getElementById('main-title');
     let resultPageIndex = 0;
 
     const days = document.getElementById('days');
@@ -1166,6 +1167,12 @@
 
     function clean(text) {
       return text.replace(/[<>]/g, '').replace(/\s+/g, ' ').trim();
+    }
+
+    function roadmapTitle(name) {
+      if (!name || name === 'You') return 'Your Custom Roadmap';
+      const possessive = /s$/i.test(name) ? name + "'" : name + "'s";
+      return possessive + ' Custom Roadmap';
     }
 
     function escapeHTML(value) {
@@ -1397,6 +1404,7 @@
         results.innerHTML = buildRoadmap(data, roadmap);
         results.classList.add('show');
         document.body.classList.add('has-results');
+        mainTitle.textContent = roadmapTitle(data.firstName);
         setResultPage(0);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (error) {
