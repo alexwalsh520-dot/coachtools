@@ -95,6 +95,7 @@ Plan rules:
 - For cannotDo, write 3 bullets about what a static roadmap cannot do for her.
 - For coachCanDo, write 3 bullets about what coaching can do: keep her accountable, adjust the plan when life changes, and help her recover quickly when she slips. Keep it clear and useful, not pitchy.
 - coachBridge should connect the two lists in 2-3 sentences: the plan is valuable, but coaching helps her implement it when the hardest moments happen.
+- For nonNegotiables, do not include checkbox symbols; the page adds the checkboxes.
 - Keep the DM bridge consistent: "When you're chatting with us in your Instagram DMs about the challenge, if you decide you want help actually running this roadmap for the next 6 weeks, just mention it so we know to talk through that option with you."
 
 Return only JSON matching the schema.

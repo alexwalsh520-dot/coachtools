@@ -1213,9 +1213,13 @@
       }).join('');
     }
 
+    function stripCheckboxPrefix(item) {
+      return String(item || '').replace(/^\u2610\s*/, '').replace(/^\[ \]\s*/, '');
+    }
+
     function renderChecks(items) {
       return (items || []).map(function(item) {
-        return '<div class="check"><span class="box"></span><span>' + escapeHTML(item) + '</span></div>';
+        return '<div class="check"><span class="box"></span><span>' + escapeHTML(stripCheckboxPrefix(item)) + '</span></div>';
       }).join('');
     }
 
@@ -1278,7 +1282,7 @@
         return header +
           'YOUR 3 NON-NEGOTIABLES\n\n' +
           (roadmap.nonNegotiables || []).map(function(item) {
-            return '[ ] ' + item.replace(/^\u2610\s*/, '').replace(/^\[ \]\s*/, '');
+            return '[ ] ' + stripCheckboxPrefix(item);
           }).join('\n');
       }
 
