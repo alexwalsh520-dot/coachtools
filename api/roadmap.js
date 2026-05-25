@@ -13,8 +13,7 @@ const ROADMAP_SCHEMA = {
     'nonNegotiables',
     'cannotDo',
     'coachCanDo',
-    'coachBridge',
-    'dmBridge'
+    'whyNow'
   ],
   properties: {
     hero: { type: 'string' },
@@ -63,8 +62,10 @@ const ROADMAP_SCHEMA = {
       type: 'array',
       items: { type: 'string' }
     },
-    coachBridge: { type: 'string' },
-    dmBridge: { type: 'string' }
+    whyNow: {
+      type: 'array',
+      items: { type: 'string' }
+    }
   }
 };
 
@@ -80,7 +81,7 @@ The tool's job:
 Voice:
 - Warm, direct, coach-like, emotionally sharp, never cheesy.
 - Write to a woman in a summer shred challenge.
-- Write as Lucy. If the copy refers to the coach, use first-person singular: "I", "me", "my". Never say "us", "we", "our team", or "the team".
+- Do not imply Lucy personally will be her coach. If the copy refers to support, say "a coach" or "your coach." Never say "I can", "we", "us", "our team", or "the team".
 - Use short, skimmable copy.
 - Use her exact "why now" answer as the quote.
 - Pull one concrete phrase from her answers into the reflection when possible.
@@ -94,11 +95,9 @@ Plan rules:
 - If readiness is low, make the plan smaller and more confidence-building.
 - If weekends, cravings, low energy, or busy evenings are selected, reflect that in the plan.
 - For cannotDo, write 3 bullets about what a static roadmap cannot do for her. Make each bullet specific to her answers: selected derailers, context, schedule, location, past attempts, or readiness.
-- For coachCanDo, write 3 bullets about what coaching can do for this specific person: keep her accountable around her named derailer, adjust her plan around her actual schedule/location/context, and help her recover quickly from the pattern that made past attempts not stick. Each bullet must include at least one concrete detail from her inputs. Keep it clear and useful, not pitchy.
-- coachBridge should connect the two lists in 2-3 sentences: the plan is valuable, but coaching helps her implement it when the hardest moments happen. Mention 1-2 details from her answers so it feels written for her.
+- For coachCanDo, write 3 bullets about what a coach can do for this specific person: keep her accountable around her named derailer, adjust her plan around her actual schedule/location/context, and help her recover quickly from the pattern that made past attempts not stick. Each bullet must include at least one concrete detail from her inputs. Start each bullet with "A coach can" or "A coach helps". Keep it clear and useful, not pitchy.
+- For whyNow, write 3-4 strong, simple reframe bullets that create urgency without shame. This is the most important section on the page. Use her exact ammo: age range, kids/no kids, work type, schedule constraints, goal, derailers, past attempts, readiness, and why-now answer. Make waiting feel costly by showing the pattern she is tired of repeating, the summer she wants, the energy/confidence she wants back, and why this season of life matters. No guarantees, no fear-mongering, no medical claims.
 - For nonNegotiables, do not include checkbox symbols; the page adds the checkboxes.
-- The DM frame is relationship-building: Lucy is asking her questions about her fitness journey in Instagram DMs. Do not make the bridge sound like a sales call, booking push, or new funnel.
-- Keep the DM bridge consistent: "When you're chatting with me in the Instagram DMs about your fitness journey, if you want help actually running this roadmap for the next 6 weeks, mention it and I'll talk through what that could look like with you."
 
 Return only JSON matching the schema.
 `.trim();

@@ -703,7 +703,7 @@
       margin-top: 12px;
     }
 
-    .dm-button {
+    .challenge-button {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1274,7 +1274,7 @@
           <section class="result-page" data-result-page="2">
             <section class="section">
               <h2 class="page-title">Your Six-Week Roadmap</h2>
-              <p class="body-copy">Workout plan, diet plan, and recipes are in the school group too.</p>
+              <p class="body-copy">Workout plan, diet plan, and recipes are in the Skool group too.</p>
               <div class="phase-grid">${renderPhases(roadmap.phases)}</div>
             </section>
           </section>
@@ -1301,13 +1301,10 @@
                 <ul class="bullet-list">${renderList(roadmap.cannotDo)}</ul>
                 <h3>What Coaching Can Do</h3>
                 <ul class="bullet-list">${renderList(roadmap.coachCanDo)}</ul>
-                <p class="body-copy">${escapeHTML(roadmap.coachBridge)}</p>
+                <h3>Why Now?</h3>
+                <ul class="bullet-list">${renderList(roadmap.whyNow)}</ul>
               </div>
-            </section>
-            <section class="section">
-              <h3>Keep Chatting With Lucy</h3>
-              <p class="micro">${escapeHTML(roadmap.dmBridge)}</p>
-              <a class="dm-button" href="https://ig.me/m/lucy.hubbard" target="_blank" rel="noopener noreferrer">DM Lucy About Your Fitness Journey</a>
+              <a class="challenge-button" href="https://www.skool.com/lucys-free-challenge-4734" target="_blank" rel="noopener noreferrer">Back to The Summer Shred Challenge</a>
             </section>
           </section>
         </div>
