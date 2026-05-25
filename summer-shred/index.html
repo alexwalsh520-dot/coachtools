@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#FFF8FA">
-  <title>Custom 6-Week Summer Shred Roadmap</title>
+  <title>Lucy's Summer Shred Roadmap</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #FFF8FA;
@@ -64,13 +64,11 @@
     }
 
     h1 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 34px;
-      font-weight: 500;
-      font-style: italic;
+      font-size: 31px;
+      font-weight: 800;
       color: var(--ink);
       margin-bottom: 8px;
-      line-height: 1.05;
+      line-height: 1.08;
       letter-spacing: 0;
     }
 
@@ -134,11 +132,9 @@
     }
 
     h2 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 27px;
-      font-style: italic;
-      font-weight: 500;
-      line-height: 1.08;
+      font-size: 23px;
+      font-weight: 800;
+      line-height: 1.15;
       letter-spacing: 0;
       margin-bottom: 8px;
     }
@@ -300,10 +296,8 @@
 
     .range-value {
       color: var(--pink-deep);
-      font-size: 32px;
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-style: italic;
-      font-weight: 600;
+      font-size: 29px;
+      font-weight: 800;
       line-height: 1;
     }
 
@@ -414,33 +408,6 @@
       animation: rise 0.25s ease;
     }
 
-    .results-hero {
-      padding: 26px 20px 22px;
-      background: linear-gradient(135deg, #F06292 0%, var(--pink-deep) 100%);
-      color: #ffffff;
-      text-align: center;
-    }
-
-    .results-hero .eyebrow {
-      color: #ffffff;
-      margin-bottom: 8px;
-      opacity: 0.85;
-    }
-
-    .results-hero h2 {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 32px;
-      font-style: italic;
-      font-weight: 500;
-      margin-bottom: 8px;
-    }
-
-    .results-hero p {
-      color: rgba(255, 255, 255, 0.84);
-      font-size: 14px;
-      max-width: 39rem;
-    }
-
     .result-body {
       padding: 20px 20px 112px;
     }
@@ -455,13 +422,11 @@
     }
 
     .page-title {
-      color: var(--pink-deep);
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 32px;
-      font-style: italic;
-      font-weight: 500;
-      line-height: 1.05;
-      margin-bottom: 10px;
+      color: var(--ink);
+      font-size: 23px;
+      font-weight: 800;
+      line-height: 1.16;
+      margin-bottom: 12px;
     }
 
     .result-split {
@@ -566,11 +531,9 @@
       background: linear-gradient(135deg, var(--pink-faint) 0%, var(--pink-soft) 100%);
       border-radius: 14px;
       color: var(--pink-deep);
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 22px;
-      font-style: italic;
-      font-weight: 600;
-      line-height: 1.18;
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1.25;
       padding: 20px 18px;
       margin: 12px 0;
       text-align: center;
@@ -729,25 +692,15 @@
       border: 1px solid var(--line);
     }
 
+    .fork .bullet-list + h3 {
+      margin-top: 24px;
+    }
+
     .micro {
       color: var(--ink-soft);
       font-size: 13.5px;
       line-height: 1.56;
       margin-top: 12px;
-    }
-
-    .restart {
-      display: none;
-      width: 100%;
-      min-height: 50px;
-      margin-top: 18px;
-      background: var(--pink);
-      color: #ffffff;
-      box-shadow: var(--shadow-pink);
-    }
-
-    .results.show + .restart {
-      display: block;
     }
 
     .results.show ~ .fine-print {
@@ -797,17 +750,8 @@
       }
 
       .result-body,
-      .results-hero {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-
-      .results-hero h2 {
-        font-size: 30px;
-      }
-
       .page-title {
-        font-size: 29px;
+        font-size: 22px;
       }
 
       .result-nav {
@@ -826,8 +770,8 @@
   <main class="shell">
     <div class="topbar">
       <div class="brand">
-        <div class="eyebrow">Summer Shred</div>
-        <h1>Custom 6-Week Roadmap</h1>
+        <div class="eyebrow">Custom 6-Week Roadmap</div>
+        <h1>Lucy's Summer Shred</h1>
       </div>
       <div class="step-count" id="step-count">1 / 6</div>
     </div>
@@ -1098,8 +1042,6 @@
       </div>
     </section>
 
-    <button class="restart" type="button" id="restart">Edit Answers</button>
-
     <p class="fine-print">Educational fitness and nutrition guidance only. If you are pregnant, breastfeeding, injured, managing a medical condition, or recovering from illness or surgery, work with a qualified professional.</p>
   </main>
 
@@ -1116,7 +1058,6 @@
     const nav = document.getElementById('nav');
     const results = document.getElementById('results');
     const loading = document.getElementById('loading');
-    const restart = document.getElementById('restart');
     let resultPageIndex = 0;
 
     const days = document.getElementById('days');
@@ -1282,11 +1223,6 @@
       ];
 
       return `
-        <div class="results-hero">
-          <div class="eyebrow">Your roadmap</div>
-          <h2>${escapeHTML(roadmap.hero)}</h2>
-          <p>You do not need a perfect life to run this. You need a plan built around the life you actually have.</p>
-        </div>
         <div class="result-body">
           <section class="result-page active" data-result-page="0">
             <section class="section">
@@ -1307,7 +1243,7 @@
 
           <section class="result-page" data-result-page="1">
             <section class="section">
-              <h2 class="page-title">Your Why, In Your Words</h2>
+              <h2 class="page-title">Your Why And Your Words</h2>
               <div class="why-quote">"${escapeHTML(roadmap.whyQuote || data.why)}"</div>
               <p class="body-copy">${escapeHTML(roadmap.whyReflection)}</p>
             </section>
@@ -1319,7 +1255,7 @@
 
           <section class="result-page" data-result-page="2">
             <section class="section">
-              <h2 class="page-title">Your 6-Week Roadmap</h2>
+              <h2 class="page-title">Your Six-Week Roadmap</h2>
               <div class="phase-grid">${renderPhases(roadmap.phases)}</div>
             </section>
           </section>
@@ -1420,14 +1356,10 @@
         : 'The AI endpoint is connected, but it could not generate the roadmap right now.';
 
       return `
-        <div class="results-hero">
-          <div class="eyebrow">Setup needed</div>
-          <h2>The roadmap AI is not connected yet.</h2>
-          <p>${escapeHTML(setupCopy)}</p>
-        </div>
         <div class="result-body">
           <section class="section">
-            <h3>What to do next</h3>
+            <h2 class="page-title">The Roadmap AI Is Not Connected Yet</h2>
+            <p class="body-copy">${escapeHTML(setupCopy)}</p>
             <p class="body-copy">Add the Claude API key as <strong>ANTHROPIC_API_KEY</strong> in Vercel, redeploy, and this page will generate the custom roadmap from the answers instead of showing this setup message.</p>
           </section>
         </div>
@@ -1463,27 +1395,14 @@
         results.classList.add('show');
         document.body.classList.add('has-results');
         setResultPage(0);
-        restart.style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (error) {
         loading.classList.remove('show');
         results.innerHTML = buildUnavailableMessage(error);
         results.classList.add('show');
         document.body.classList.add('has-results');
-        restart.style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-    });
-
-    restart.addEventListener('click', function() {
-      results.classList.remove('show');
-      results.innerHTML = '';
-      resultPageIndex = 0;
-      document.body.classList.remove('has-results');
-      restart.style.display = 'none';
-      form.style.display = 'block';
-      nav.style.display = 'flex';
-      setScreen(0);
     });
 
     updateRangeLabels();
