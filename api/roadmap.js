@@ -115,7 +115,7 @@ function sanitizeAnswers(raw) {
   return {
     firstName: cleanText(raw.firstName, 40) || 'You',
     why: cleanText(raw.why, 700),
-    goal: cleanText(raw.goal, 90),
+    goal: cleanText(raw.goal, 180),
     ageRange: cleanText(raw.ageRange, 20),
     context: cleanArray(raw.context, 8),
     days: Math.min(Math.max(Number(raw.days) || 3, 1), 6),
