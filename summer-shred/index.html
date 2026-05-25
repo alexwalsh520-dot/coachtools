@@ -38,6 +38,10 @@
       padding: 28px 18px 56px;
     }
 
+    body.has-results {
+      padding-bottom: 146px;
+    }
+
     .shell {
       max-width: 460px;
       margin: 0 auto;
@@ -438,7 +442,100 @@
     }
 
     .result-body {
-      padding: 20px;
+      padding: 20px 20px 112px;
+    }
+
+    .result-page {
+      display: none;
+      min-height: 54vh;
+    }
+
+    .result-page.active {
+      display: block;
+    }
+
+    .page-title {
+      color: var(--pink-deep);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 32px;
+      font-style: italic;
+      font-weight: 500;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .result-split {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .mini-panel {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--pink-faint);
+      padding: 15px;
+    }
+
+    .mini-panel h3 {
+      margin-bottom: 8px;
+    }
+
+    .result-nav {
+      position: fixed;
+      left: 50%;
+      bottom: 12px;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: min(600px, calc(100% - 24px));
+      padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 -10px 30px rgba(194, 24, 91, 0.16);
+      transform: translateX(-50%);
+      backdrop-filter: blur(12px);
+    }
+
+    .result-arrow {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      min-height: 46px;
+      border: 1.5px solid var(--line);
+      border-radius: 50%;
+      background: var(--paper);
+      color: var(--pink-deep);
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1;
+      box-shadow: 0 3px 10px rgba(194, 24, 91, 0.08);
+    }
+
+    .result-arrow.primary {
+      border-color: var(--pink);
+      background: var(--pink);
+      color: #ffffff;
+      box-shadow: var(--shadow-pink);
+    }
+
+    .result-arrow:disabled {
+      cursor: not-allowed;
+      opacity: 0.36;
+      box-shadow: none;
+    }
+
+    .result-page-label {
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
     .section {
@@ -570,66 +667,6 @@
       background: var(--pink);
     }
 
-    .deliverable-grid {
-      display: grid;
-      gap: 10px;
-      margin-top: 13px;
-    }
-
-    .deliverable-card {
-      display: grid;
-      grid-template-columns: 36px 1fr auto;
-      gap: 10px;
-      align-items: center;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: var(--pink-faint);
-      padding: 10px;
-    }
-
-    .jump-link {
-      display: grid;
-      place-items: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--pink);
-      color: #ffffff;
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 1;
-      text-decoration: none;
-      box-shadow: 0 2px 8px rgba(236, 64, 122, 0.22);
-    }
-
-    .deliverable-card strong {
-      display: block;
-      color: var(--ink);
-      font-size: 13.5px;
-      line-height: 1.22;
-    }
-
-    .deliverable-card span {
-      display: block;
-      color: var(--ink-soft);
-      font-size: 11.5px;
-      line-height: 1.3;
-      margin-top: 2px;
-    }
-
-    .download-btn {
-      min-height: 36px;
-      border: 1.5px solid var(--pink);
-      border-radius: 9px;
-      background: var(--paper);
-      color: var(--pink);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      padding: 0 10px;
-      white-space: nowrap;
-    }
-
     .day-plan {
       display: grid;
       gap: 9px;
@@ -713,6 +750,10 @@
       display: block;
     }
 
+    .results.show ~ .fine-print {
+      margin-bottom: 108px;
+    }
+
     .fine-print {
       color: var(--ink-faint);
       font-size: 11.5px;
@@ -765,18 +806,18 @@
         font-size: 30px;
       }
 
+      .page-title {
+        font-size: 29px;
+      }
+
+      .result-nav {
+        bottom: 8px;
+        border-radius: 16px;
+      }
+
       .meal {
         grid-template-columns: 1fr;
         gap: 4px;
-      }
-
-      .deliverable-card {
-        grid-template-columns: 34px 1fr;
-      }
-
-      .download-btn {
-        grid-column: 2;
-        width: 100%;
       }
     }
   </style>
@@ -1076,7 +1117,7 @@
     const results = document.getElementById('results');
     const loading = document.getElementById('loading');
     const restart = document.getElementById('restart');
-    let activeRoadmapData = null;
+    let resultPageIndex = 0;
 
     const days = document.getElementById('days');
     const daysValue = document.getElementById('days-value');
@@ -1223,94 +1264,23 @@
       }).join('');
     }
 
-    function renderDeliverableCard(kind, href, title, subtitle) {
-      return '<div class="deliverable-card">' +
-        '<a class="jump-link" href="' + href + '" aria-label="Jump to ' + escapeHTML(title) + '">&darr;</a>' +
-        '<div><strong>' + escapeHTML(title) + '</strong><span>' + escapeHTML(subtitle) + '</span></div>' +
-        '<button class="download-btn" type="button" data-download="' + kind + '">Download</button>' +
-      '</div>';
-    }
-
-    function renderDeliverables() {
-      return [
-        renderDeliverableCard('why', '#why-section', 'Why + Starting Point', 'Your motivation and current reality'),
-        renderDeliverableCard('roadmap', '#roadmap-section', '6-Week Roadmap', 'Three phases with action bullets'),
-        renderDeliverableCard('food', '#food-section', 'Sample Day Of Eating', 'Simple protein-first day'),
-        renderDeliverableCard('nonnegotiables', '#nonnegotiables-section', 'Non-Negotiables', 'Your screenshot checklist'),
-        renderDeliverableCard('coaching', '#coaching-section', 'Plan vs Coaching', 'What support changes')
-      ].join('');
-    }
-
-    function textList(items) {
-      return (items || []).map(function(item) {
-        return '- ' + item;
-      }).join('\n');
-    }
-
-    function buildDownloadText(kind, data, roadmap) {
-      const title = 'Custom 6-Week Summer Shred Roadmap';
-      const header = title + '\n' + (data.firstName || 'Your') + ' roadmap\n\n';
-      if (kind === 'why') {
-        return header +
-          'YOUR WHY, IN YOUR WORDS\n' +
-          '"' + (roadmap.whyQuote || data.why) + '"\n\n' +
-          roadmap.whyReflection + '\n\n' +
-          'YOUR STARTING POINT\n' +
-          textList(roadmap.startingPoint);
-      }
-
-      if (kind === 'roadmap') {
-        return header +
-          'YOUR 6-WEEK ROADMAP\n\n' +
-          (roadmap.phases || []).map(function(phase) {
-            const bullets = Array.isArray(phase.bullets) && phase.bullets.length
-              ? phase.bullets
-              : String(phase.body || '').split(/(?<=\.)\s+/).filter(Boolean);
-            return phase.title + '\n' + textList(bullets);
-          }).join('\n\n');
-      }
-
-      if (kind === 'food') {
-        return header +
-          'SAMPLE SUMMER SHRED DAY OF EATING\n\n' +
-          (roadmap.dayOfEating || []).map(function(meal) {
-            return meal.label + ': ' + meal.body;
-          }).join('\n\n');
-      }
-
-      if (kind === 'nonnegotiables') {
-        return header +
-          'YOUR 3 NON-NEGOTIABLES\n\n' +
-          (roadmap.nonNegotiables || []).map(function(item) {
-            return '[ ] ' + stripCheckboxPrefix(item);
-          }).join('\n');
-      }
-
-      return header +
-        'WHAT THIS ROADMAP CANNOT DO FOR YOU\n' +
-        textList(roadmap.cannotDo) + '\n\n' +
-        'WHAT COACHING CAN DO\n' +
-        textList(roadmap.coachCanDo) + '\n\n' +
-        roadmap.coachBridge + '\n\n' +
-        roadmap.dmBridge;
-    }
-
-    function downloadFile(kind) {
-      if (!activeRoadmapData) return;
-      const text = buildDownloadText(kind, activeRoadmapData.data, activeRoadmapData.roadmap);
-      const filename = 'summer-shred-' + kind + '.txt';
-      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(url);
-    }
-
     function buildRoadmap(data, roadmap) {
+      const primaryDerailer = Array.isArray(data.derailers) && data.derailers.length
+        ? data.derailers[0].toLowerCase()
+        : 'real life';
+
+      const isList = [
+        'A 6-week structure built around ' + data.days + ' workout days, ' + data.sessionLength + '-minute sessions, and ' + data.location + '.',
+        'A simple path for strength, walking, protein-first food, and weekly check-ins.',
+        'A screenshot-friendly plan you can come back to during the challenge.'
+      ];
+
+      const isNotList = [
+        'Not a promise that every week will go perfectly.',
+        'Not medical advice or a replacement for a qualified professional.',
+        'Not accountability by itself when ' + primaryDerailer + ' hits.'
+      ];
+
       return `
         <div class="results-hero">
           <div class="eyebrow">Your roadmap</div>
@@ -1318,60 +1288,110 @@
           <p>You do not need a perfect life to run this. You need a plan built around the life you actually have.</p>
         </div>
         <div class="result-body">
-          <section class="section">
-            <h3>Your Roadmap Files</h3>
-            <p class="body-copy">Tap the arrow to jump to each deliverable, or download that piece as a file on your phone.</p>
-            <div class="deliverable-grid">${renderDeliverables()}</div>
+          <section class="result-page active" data-result-page="0">
+            <section class="section">
+              <h2 class="page-title">What This Roadmap Is</h2>
+              <p class="body-copy">This is the simple version of the next 6 weeks: clear enough to screenshot, personal enough to feel like it was made from your real life, and focused on action instead of more theory.</p>
+              <div class="result-split">
+                <div class="mini-panel">
+                  <h3>It Is</h3>
+                  <ul class="bullet-list">${renderList(isList)}</ul>
+                </div>
+                <div class="mini-panel">
+                  <h3>It Isn't</h3>
+                  <ul class="bullet-list">${renderList(isNotList)}</ul>
+                </div>
+              </div>
+            </section>
           </section>
 
-          <section class="section" id="why-section">
-            <h3>Your Why, In Your Words</h3>
-            <div class="why-quote">"${escapeHTML(roadmap.whyQuote || data.why)}"</div>
-            <p class="body-copy">${escapeHTML(roadmap.whyReflection)}</p>
+          <section class="result-page" data-result-page="1">
+            <section class="section">
+              <h2 class="page-title">Your Why, In Your Words</h2>
+              <div class="why-quote">"${escapeHTML(roadmap.whyQuote || data.why)}"</div>
+              <p class="body-copy">${escapeHTML(roadmap.whyReflection)}</p>
+            </section>
+            <section class="section">
+              <h3>Your Summer Shred Starting Point</h3>
+              <ul class="bullet-list">${renderList(roadmap.startingPoint)}</ul>
+            </section>
           </section>
 
-          <section class="section" id="starting-point-section">
-            <h3>Your Summer Shred Starting Point</h3>
-            <ul class="bullet-list">${renderList(roadmap.startingPoint)}</ul>
+          <section class="result-page" data-result-page="2">
+            <section class="section">
+              <h2 class="page-title">Your 6-Week Roadmap</h2>
+              <div class="phase-grid">${renderPhases(roadmap.phases)}</div>
+            </section>
           </section>
 
-          <section class="section" id="roadmap-section">
-            <h3>Your Custom 6-Week Summer Shred Roadmap</h3>
-            <div class="phase-grid">${renderPhases(roadmap.phases)}</div>
+          <section class="result-page" data-result-page="3">
+            <section class="section">
+              <h2 class="page-title">Sample Day Of Eating</h2>
+              <div class="day-plan">${renderMeals(roadmap.dayOfEating)}</div>
+            </section>
           </section>
 
-          <section class="section" id="food-section">
-            <h3>Sample Summer Shred Day Of Eating</h3>
-            <div class="day-plan">${renderMeals(roadmap.dayOfEating)}</div>
+          <section class="result-page" data-result-page="4">
+            <section class="section">
+              <h2 class="page-title">Your Non-Negotiables</h2>
+              <div class="checks">${renderChecks(roadmap.nonNegotiables)}</div>
+            </section>
           </section>
 
-          <section class="section" id="nonnegotiables-section">
-            <h3>Your 3 Non-Negotiables For This Shred</h3>
-            <div class="checks">${renderChecks(roadmap.nonNegotiables)}</div>
+          <section class="result-page" data-result-page="5">
+            <section class="section">
+              <h2 class="page-title">Where Coaching Fits</h2>
+              <div class="fork">
+                <h3>What This Roadmap Can't Do For You</h3>
+                <ul class="bullet-list">${renderList(roadmap.cannotDo)}</ul>
+                <h3>What Coaching Can Do</h3>
+                <ul class="bullet-list">${renderList(roadmap.coachCanDo)}</ul>
+                <p class="body-copy">${escapeHTML(roadmap.coachBridge)}</p>
+              </div>
+            </section>
+            <section class="section">
+              <h3>Back In The Challenge</h3>
+              <p class="micro">${escapeHTML(roadmap.dmBridge)}</p>
+            </section>
           </section>
-
-          <section class="section" id="coaching-section">
-            <div class="fork">
-              <h3>What This Roadmap Can't Do For You</h3>
-              <ul class="bullet-list">${renderList(roadmap.cannotDo)}</ul>
-              <h3>What Coaching Can Do</h3>
-              <ul class="bullet-list">${renderList(roadmap.coachCanDo)}</ul>
-              <p class="body-copy">${escapeHTML(roadmap.coachBridge)}</p>
-            </div>
-          </section>
-
-          <section class="section">
-            <h3>Back In The Challenge</h3>
-            <p class="micro">${escapeHTML(roadmap.dmBridge)}</p>
-          </section>
+        </div>
+        <div class="result-nav" aria-label="Roadmap navigation">
+          <button class="result-arrow" type="button" data-result-back aria-label="Previous roadmap screen">&larr;</button>
+          <span class="result-page-label" data-result-page-label>1 / 6</span>
+          <button class="result-arrow primary" type="button" data-result-next aria-label="Next roadmap screen">&rarr;</button>
         </div>
       `;
     }
 
+    function setResultPage(index) {
+      const pages = Array.from(results.querySelectorAll('[data-result-page]'));
+      if (!pages.length) return;
+
+      resultPageIndex = Math.max(0, Math.min(index, pages.length - 1));
+      pages.forEach(function(page, pageIndex) {
+        page.classList.toggle('active', pageIndex === resultPageIndex);
+      });
+
+      const label = results.querySelector('[data-result-page-label]');
+      const back = results.querySelector('[data-result-back]');
+      const next = results.querySelector('[data-result-next]');
+
+      if (label) label.textContent = (resultPageIndex + 1) + ' / ' + pages.length;
+      if (back) back.disabled = resultPageIndex === 0;
+      if (next) next.disabled = resultPageIndex === pages.length - 1;
+
+      results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     results.addEventListener('click', function(event) {
-      const button = event.target.closest('[data-download]');
-      if (!button) return;
-      downloadFile(button.getAttribute('data-download'));
+      if (event.target.closest('[data-result-back]')) {
+        setResultPage(resultPageIndex - 1);
+        return;
+      }
+
+      if (event.target.closest('[data-result-next]')) {
+        setResultPage(resultPageIndex + 1);
+      }
     });
 
     async function generateRoadmap(data) {
@@ -1438,17 +1458,18 @@
 
       try {
         const roadmap = await generateRoadmap(data);
-        activeRoadmapData = { data, roadmap };
         loading.classList.remove('show');
         results.innerHTML = buildRoadmap(data, roadmap);
         results.classList.add('show');
+        document.body.classList.add('has-results');
+        setResultPage(0);
         restart.style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (error) {
-        activeRoadmapData = null;
         loading.classList.remove('show');
         results.innerHTML = buildUnavailableMessage(error);
         results.classList.add('show');
+        document.body.classList.add('has-results');
         restart.style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
@@ -1457,7 +1478,8 @@
     restart.addEventListener('click', function() {
       results.classList.remove('show');
       results.innerHTML = '';
-      activeRoadmapData = null;
+      resultPageIndex = 0;
+      document.body.classList.remove('has-results');
       restart.style.display = 'none';
       form.style.display = 'block';
       nav.style.display = 'flex';
