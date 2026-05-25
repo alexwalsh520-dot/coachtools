@@ -238,6 +238,7 @@
     }
 
     input[type="text"],
+    input[type="number"],
     textarea {
       width: 100%;
       border: 1.5px solid transparent;
@@ -259,6 +260,7 @@
     }
 
     input[type="text"]:focus,
+    input[type="number"]:focus,
     textarea:focus {
       border-color: var(--pink);
       background: #ffffff;
@@ -835,29 +837,8 @@
           <h2>What does real life look like right now?</h2>
           <p class="prompt">This is what keeps the plan grounded instead of cute-but-useless.</p>
           <div class="field">
-            <span class="field-label">Age range</span>
-            <div class="choices three" data-group="ageRange">
-              <label class="choice">
-                <input type="radio" name="ageRange" value="18-24">
-                <span class="choice-text">18-24</span>
-              </label>
-              <label class="choice">
-                <input type="radio" name="ageRange" value="25-34">
-                <span class="choice-text">25-34</span>
-              </label>
-              <label class="choice">
-                <input type="radio" name="ageRange" value="35-44">
-                <span class="choice-text">35-44</span>
-              </label>
-              <label class="choice">
-                <input type="radio" name="ageRange" value="45-54">
-                <span class="choice-text">45-54</span>
-              </label>
-              <label class="choice">
-                <input type="radio" name="ageRange" value="55+">
-                <span class="choice-text">55+</span>
-              </label>
-            </div>
+            <label class="field-label" for="age">Age</label>
+            <input id="age" name="age" type="number" inputmode="numeric" min="18" max="100" placeholder="34">
           </div>
           <div class="field">
             <span class="field-label">Life context</span>
@@ -893,7 +874,7 @@
             </div>
             <input class="other-field" id="context-other" type="text" placeholder="A few words about real life right now">
           </div>
-          <div class="error" data-error>Choose an age range and at least one life-context box.</div>
+          <div class="error" data-error>Enter your age and choose at least one life-context box.</div>
         </div>
 
         <div class="screen" data-screen="2">
@@ -1154,7 +1135,7 @@
 
     function validateScreen(index) {
       if (index === 0) return withOther(valuesFor('goal'), 'goal-other').length > 0;
-      if (index === 1) return Boolean(radioValue('ageRange')) && withOther(valuesFor('context'), 'context-other').length > 0;
+      if (index === 1) return validAge() && withOther(valuesFor('context'), 'context-other').length > 0;
       if (index === 2) return Boolean(radioValue('location')) && Boolean(radioValue('sessionLength'));
       if (index === 3) return withOther(valuesFor('derailers'), 'derailers-other').length > 0;
       if (index === 4) return withOther(valuesFor('history'), 'history-other').length > 0;
@@ -1162,12 +1143,17 @@
       return true;
     }
 
+    function validAge() {
+      const age = Number(document.getElementById('age').value);
+      return Number.isFinite(age) && age >= 18 && age <= 100;
+    }
+
     function collectData() {
       return {
         firstName: clean(document.getElementById('first-name').value.trim()) || 'You',
         why: clean(document.getElementById('why').value.trim()),
         goal: withOther(valuesFor('goal'), 'goal-other').join(', '),
-        ageRange: radioValue('ageRange'),
+        age: Number(document.getElementById('age').value),
         context: withOther(valuesFor('context'), 'context-other'),
         days: Number(days.value),
         location: radioValue('location'),

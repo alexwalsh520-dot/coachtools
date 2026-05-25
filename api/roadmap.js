@@ -96,7 +96,7 @@ Plan rules:
 - If weekends, cravings, low energy, or busy evenings are selected, reflect that in the plan.
 - For cannotDo, write 3 bullets about what a static roadmap cannot do for her. Make each bullet specific to her answers: selected derailers, context, schedule, location, past attempts, or readiness.
 - For coachCanDo, write 3 bullets about what a coach can do for this specific person: keep her accountable around her named derailer, adjust her plan around her actual schedule/location/context, and help her recover quickly from the pattern that made past attempts not stick. Each bullet must include at least one concrete detail from her inputs. Start each bullet with "A coach can" or "A coach helps". Keep it clear and useful, not pitchy.
-- For whyNow, write 3-4 strong, simple reframe bullets that create urgency without shame. This is the most important section on the page. Each bullet must be one sentence and 18-30 words. Use her exact ammo: age range, kids/no kids, work type, schedule constraints, goal, derailers, past attempts, readiness, and why-now answer. Make waiting feel costly by showing the pattern she is tired of repeating, the summer she wants, the energy/confidence she wants back, and why this season of life matters. No guarantees, no fear-mongering, no medical claims.
+- For whyNow, write 3-4 strong, simple reframe bullets that create urgency without shame. This is the most important section on the page. Each bullet must be one sentence and 18-30 words. Use her exact ammo: age, kids/no kids, work type, schedule constraints, goal, derailers, past attempts, readiness, and why-now answer. Make waiting feel costly by showing the pattern she is tired of repeating, the summer she wants, the energy/confidence she wants back, and why this season of life matters. No guarantees, no fear-mongering, no medical claims.
 - For nonNegotiables, do not include checkbox symbols; the page adds the checkboxes.
 
 Return only JSON matching the schema.
@@ -115,12 +115,18 @@ function cleanArray(value, maxItems) {
     .slice(0, maxItems);
 }
 
+function cleanAge(value, fallback) {
+  const age = Number(value);
+  if (Number.isFinite(age) && age >= 18 && age <= 100) return Math.round(age);
+  return cleanText(fallback, 20);
+}
+
 function sanitizeAnswers(raw) {
   return {
     firstName: cleanText(raw.firstName, 40) || 'You',
     why: cleanText(raw.why, 700),
     goal: cleanText(raw.goal, 180),
-    ageRange: cleanText(raw.ageRange, 20),
+    age: cleanAge(raw.age, raw.ageRange),
     context: cleanArray(raw.context, 8),
     days: Math.min(Math.max(Number(raw.days) || 3, 1), 6),
     location: cleanText(raw.location, 40),
