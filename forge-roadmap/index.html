@@ -61,9 +61,9 @@
     .road-hero{text-align:center;padding:8px 0 22px;border-bottom:1px solid var(--line);margin-bottom:22px}
     .road-hero h1{font-size:30px;font-weight:800;letter-spacing:-.6px;line-height:1.12;margin:10px 0 6px}
     .road-hero .goal{font-size:13.5px;color:var(--gold);font-weight:600}
-    .sec{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:14px;box-shadow:var(--shadow)}
-    .sec h2{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px;font-family:'Oswald',sans-serif}
-    .sec p{font-size:15px;color:var(--ink-2);margin-bottom:10px}
+    .sec{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 19px;margin-bottom:18px;box-shadow:var(--shadow)}
+    .sec h2{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:15px;font-family:'Oswald',sans-serif}
+    .sec p{font-size:15px;color:var(--ink-2);line-height:1.62;margin-bottom:11px}
     .sec p:last-child{margin-bottom:0}
     .sec strong{color:var(--ink);font-weight:600}
     .quote{border-left:2px solid var(--gold);padding:2px 0 2px 14px;font-size:15.5px;color:var(--ink);font-style:italic;margin-bottom:12px}
@@ -72,7 +72,7 @@
     .phase .ph-h{font-weight:700;font-size:15px;margin-bottom:8px;color:var(--ink)}
     .phase .ph-h span{color:var(--gold);font-family:'Oswald',sans-serif;letter-spacing:.04em;margin-right:8px}
     ul.bul{list-style:none;display:flex;flex-direction:column;gap:8px}
-    ul.bul li{position:relative;padding-left:20px;font-size:14.5px;color:var(--ink-2)}
+    ul.bul li{position:relative;padding-left:21px;font-size:15px;line-height:1.5;color:var(--ink-2)}
     ul.bul li::before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--gold-deep)}
     .plate{display:flex;flex-direction:column;gap:11px}
     .plate .row{display:flex;gap:12px}
@@ -80,8 +80,9 @@
     .plate .row .bd{font-size:14.5px;color:var(--ink-2)}
     .principle{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:13px 14px;margin:12px 0;font-size:14px;color:var(--ink-2)}
     .principle b{color:var(--gold);font-weight:700}
-    .check li::before{content:"";border-radius:3px;background:transparent;border:2px solid var(--gold-deep);width:13px;height:13px;top:4px;left:0}
-    ul.check li{padding-left:24px}
+    ul.check{list-style:none;display:flex;flex-direction:column;gap:11px}
+    ul.check li{position:relative;padding-left:27px;font-size:15px;color:var(--ink);line-height:1.5}
+    ul.check li::before{content:"";position:absolute;left:0;top:4px;width:15px;height:15px;border-radius:4px;border:2px solid var(--gold-deep);background:transparent}
     .seed{background:linear-gradient(180deg,rgba(201,169,110,.10),rgba(201,169,110,.03));border:1px solid var(--gold-deep)}
     .seed h2{color:var(--gold)}
     .cta{display:block;text-align:center;background:var(--gold);color:#1a1408;font-weight:800;font-size:15.5px;
@@ -274,56 +275,56 @@ backBtn.addEventListener("click", () => { if (screen > 0){ screen--; paint(); } 
 const C = {
   // The honest read of where they are (validating).
   startingLine: {
-    new: "You're starting close to zero, and that's the best place to be honest about it. The goal for you is not intensity, it's becoming someone who shows up. Small and repeatable beats big and gone by Friday.",
-    restart: "You've done this before, which means you already know how. This isn't a knowledge problem, it's a momentum problem. We rebuild the streak first and let strength follow it.",
-    consistent: "You already move. So your 6 weeks aren't about starting, they're about sharpening — tightening food, adding a little progression, and removing the one leak that keeps you from leaner."
+    new: "You're starting from zero. That's fine. Your only job right now is to show up. Don't try to be perfect. Just don't skip days.",
+    restart: "You've done this before, so you already know how. This time is about not stopping. Get a few days in a row and the rest gets easier.",
+    consistent: "You already work out. So these 6 weeks are about small fixes: a little tighter on food, a little more weight each week, and fixing your one bad habit."
   },
 
   // The derailer → the Atomic Habits fix. principle is accurate + brief.
   fix: {
     fade: {
-      name: "You start strong, then fade.",
-      diag: "The fast start is the trap. Motivation is highest on day one and falls every day after, so a plan built on motivation always dies around week two.",
-      principle: "<b>The rule that beats it: never miss twice.</b> Missing one day is an accident. Missing two is the start of a new habit. You don't need to be perfect, you just need to never let one skipped day become two.",
+      name: "You start strong, then quit by week 2.",
+      diag: "The fast start is the trap. You feel pumped on day 1, then a little less every day. A plan that needs you to feel pumped always dies.",
+      principle: "<b>The fix: never miss two days in a row.</b> Missing one day is fine, it happens. Just never let one skip turn into two. That's the whole game.",
       moves: [
-        "Put your training days in your calendar as fixed appointments, not 'when I get to it.'",
-        "If you miss a day, the only rule is the next day is non-negotiable. Never miss twice."
+        "Put your workout days in your phone calendar, like real appointments.",
+        "Miss a day? The next day is a must. Never skip two in a row."
       ]
     },
     alone: {
-      name: "You do it alone, and lose steam.",
-      diag: "Willpower is a private battle and it's a fair fight at best. The people who finish almost never do it on willpower — they do it because someone was watching.",
-      principle: "<b>The principle: accountability is a commitment device.</b> When someone expects you to show up, follow-through stops depending on how you feel. It's the single biggest predictor of who finishes.",
+      name: "You do it alone, and run out of steam.",
+      diag: "Doing it alone is hard. The people who finish almost never use willpower. They finish because someone was watching.",
+      principle: "<b>The fix: get one person watching you.</b> When someone expects you to show up, you show up. It works way better than trying to push yourself.",
       moves: [
-        "Grab one accountability buddy this week — a friend, your partner, anyone — and send them your training days. Report after each one.",
-        "Post your check-in in the challenge group daily. Being seen is the mechanism, not the motivation."
+        "Pick one person today, a friend or your partner. Tell them your workout days. Text them after each one.",
+        "Post in the challenge group every day. People seeing you is the trick."
       ]
     },
     night: {
-      name: "Nights and stress eating undo your day.",
-      diag: "You don't have a discipline problem at 9pm. You have an environment problem. By night your willpower is spent, so whatever is easy to reach wins.",
-      principle: "<b>The principle: make the bad habit hard, make the good one easy (environment design).</b> You don't out-discipline a kitchen full of trigger food — you remove it so the choice is made before you're tired.",
+      name: "Nights and stress eating ruin your day.",
+      diag: "It's not about willpower at 9pm. By night your willpower is gone. Whatever food is easy to grab wins.",
+      principle: "<b>The fix: make the bad food hard to reach.</b> You can't beat a kitchen full of junk at night. So don't keep it in the house. Decide before you get tired.",
       moves: [
-        "Clear the house of the one food you binge. If it's not there at 9pm, willpower never gets tested.",
-        "Pre-decide your night move — a high-protein snack and a glass of water — so there's no decision to lose."
+        "Throw out the one food you binge on. If it's not there, you can't eat it.",
+        "Pick your night snack ahead of time, like Greek yogurt and a big glass of water."
       ]
     },
     time: {
       name: "You run out of time.",
-      diag: "'No time' is almost never about hours — it's about the workout being a big scary block you have to find. Big blocks get skipped. Tiny starts don't.",
-      principle: "<b>The principle: the 2-minute rule + habit stacking.</b> Shrink the start until it's impossible to say no, and attach it to something you already do every day. Showing up beats the perfect session.",
+      diag: "\"No time\" usually means the workout feels like a big scary block. Big blocks get skipped. Tiny ones don't.",
+      principle: "<b>The fix: just start for 2 minutes.</b> Tell yourself you only have to change clothes and start. You'll almost always keep going. On a bad day, even 10 minutes counts.",
       moves: [
-        "Make the bar 'change clothes and start' — 2 minutes. You'll almost always keep going; on the worst days, 10 minutes still counts.",
-        "Stack training onto an anchor you never skip (after the morning coffee, right after work) so it rides an existing habit."
+        "Make the goal just \"change clothes and start.\" That's it.",
+        "Do it right after something you already do, like your morning coffee or right after work."
       ]
     },
     discipline: {
-      name: "You know what to do — you just don't do it.",
-      diag: "The gap isn't information, it's identity. You're still 'someone trying to get in shape,' and that person negotiates every morning. People who don't negotiate have decided who they are.",
-      principle: "<b>The principle: identity-based habits.</b> Every action is a vote for the type of person you are. You don't need to feel like training — you need to become the kind of man who trains, one rep of proof at a time.",
+      name: "You know what to do. You just don't do it.",
+      diag: "This isn't about info. It's about who you think you are. If you see yourself as \"a guy trying to get in shape,\" you'll argue with yourself every morning.",
+      principle: "<b>The fix: decide you're already that guy.</b> Every workout is proof. You don't need to feel like it. Just act like the guy who trains, one workout at a time.",
       moves: [
-        "Pick the identity: 'I'm someone who trains.' Then cast one vote for it today, however small.",
-        "Make it obvious — lay your clothes out the night before so the decision is already made when you wake up."
+        "Say it: \"I'm a guy who trains.\" Then do one thing today to prove it.",
+        "Set your clothes out the night before. Make it easy to start."
       ]
     }
   },
@@ -438,18 +439,16 @@ function render(a){
     <div class="sec" style="animation-delay:120ms">
       <h2>Your why — keep this close</h2>
       <div class="quote">${esc(a.why)}</div>
-      <p>Tape that to the mirror. Everything below only works because that reason is real. When week 2 gets hard, you won't need more motivation — you'll need to re-read that line.</p>
+      <p>Read this on the hard days. It's the reason you started.</p>
     </div>
 
     <div class="sec" style="animation-delay:180ms">
       <h2><span class="ix">01</span>Your read</h2>
-      <p>Here's the honest read on where you're starting — and the one thing to lock onto:</p>
       <p>${C.startingLine[a.start] || C.startingLine.new}</p>
     </div>
 
     <div class="sec" style="animation-delay:240ms">
       <h2><span class="ix">02</span>Your 6-week plan</h2>
-      <p>Exactly how to run your challenge workout + diet plan, paced to your real schedule:</p>
       ${phases.map(p => `
         <div class="phase">
           <div class="ph-h"><span>${p.h}</span>${p.tag}</div>
@@ -459,7 +458,6 @@ function render(a){
 
     <div class="sec" style="animation-delay:300ms">
       <h2><span class="ix">03</span>Your eating blueprint</h2>
-      <p>A simple day on a plate, built around your weak spot:</p>
       <div class="plate">
         ${plate.map(r => `<div class="row"><div class="lbl">${r[0]}</div><div class="bd">${r[1]}</div></div>`).join("")}
       </div>
