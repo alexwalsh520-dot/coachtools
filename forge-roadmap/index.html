@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0c0c0f" />
+  <title>Your Custom Summer Shred Roadmap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0c0c0f; --panel:#141418; --panel-2:#1b1b21; --line:#26262e;
+      --ink:#f4f4f6; --ink-2:#b9b9c4; --ink-3:#7c7c89;
+      --gold:#c9a96e; --gold-deep:#a8884d; --gold-soft:rgba(201,169,110,.14);
+      --red:#d4543c;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 50px rgba(0,0,0,.5);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{-webkit-text-size-adjust:100%}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;padding:24px 16px 64px}
+    .wrap{max-width:480px;margin:0 auto}
+    .display{font-family:'Oswald',sans-serif;letter-spacing:.3px;text-transform:uppercase}
+    .eyebrow{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:600}
+
+    /* ---------- Intake ---------- */
+    .progress{height:3px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:26px}
+    .progress > i{display:block;height:100%;background:var(--gold);width:0;transition:width .35s ease}
+    .screen{display:none;animation:fade .35s ease}
+    .screen.active{display:block}
+    @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    .q-eyebrow{margin-bottom:12px}
+    .q-title{font-size:23px;font-weight:700;letter-spacing:-.4px;margin-bottom:8px}
+    .q-sub{font-size:14px;color:var(--ink-2);margin-bottom:22px}
+    .field{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:13px;color:var(--ink);
+      font-family:inherit;font-size:16px;padding:15px 16px;outline:none;transition:border-color .15s}
+    .field:focus{border-color:var(--gold)}
+    textarea.field{min-height:104px;resize:none;line-height:1.5}
+    .opts{display:flex;flex-direction:column;gap:10px}
+    .opt{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:var(--panel);
+      border:1px solid var(--line);border-radius:13px;color:var(--ink);font-family:inherit;font-size:15px;
+      font-weight:500;padding:15px 16px;cursor:pointer;transition:border-color .15s,background .15s}
+    .opt:hover{border-color:var(--gold-deep)}
+    .opt.sel{border-color:var(--gold);background:var(--gold-soft)}
+    .opt .dot{flex:none;width:18px;height:18px;border-radius:50%;border:2px solid var(--ink-3);transition:.15s}
+    .opt.sel .dot{border-color:var(--gold);background:var(--gold);box-shadow:inset 0 0 0 3px var(--panel)}
+    .pair{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .pair .opt{justify-content:center;text-align:center;padding:13px 10px;font-size:14px}
+    .sub-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin:20px 0 9px}
+    .nav{display:flex;align-items:center;gap:12px;margin-top:26px}
+    .btn{flex:1;font-family:inherit;font-size:15px;font-weight:700;padding:15px;border-radius:13px;border:none;cursor:pointer;transition:filter .15s,opacity .15s}
+    .btn-primary{background:var(--gold);color:#1a1408}
+    .btn-primary:hover{filter:brightness(1.07)}
+    .btn-primary:disabled{opacity:.4;cursor:not-allowed}
+    .btn-ghost{flex:none;background:transparent;color:var(--ink-3);border:1px solid var(--line);padding:15px 18px}
+    .btn-ghost:hover{color:var(--ink-2)}
+
+    /* ---------- Roadmap output ---------- */
+    .road{display:none;animation:fade .4s ease}
+    .road.active{display:block}
+    .road-hero{text-align:center;padding:8px 0 22px;border-bottom:1px solid var(--line);margin-bottom:22px}
+    .road-hero h1{font-size:30px;font-weight:800;letter-spacing:-.6px;line-height:1.12;margin:10px 0 6px}
+    .road-hero .goal{font-size:13.5px;color:var(--gold);font-weight:600}
+    .sec{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:14px;box-shadow:var(--shadow)}
+    .sec h2{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px;font-family:'Oswald',sans-serif}
+    .sec p{font-size:15px;color:var(--ink-2);margin-bottom:10px}
+    .sec p:last-child{margin-bottom:0}
+    .sec strong{color:var(--ink);font-weight:600}
+    .quote{border-left:2px solid var(--gold);padding:2px 0 2px 14px;font-size:15.5px;color:var(--ink);font-style:italic;margin-bottom:12px}
+    .phase{padding:13px 0;border-top:1px solid var(--line)}
+    .phase:first-of-type{border-top:none;padding-top:0}
+    .phase .ph-h{font-weight:700;font-size:15px;margin-bottom:8px;color:var(--ink)}
+    .phase .ph-h span{color:var(--gold);font-family:'Oswald',sans-serif;letter-spacing:.04em;margin-right:8px}
+    ul.bul{list-style:none;display:flex;flex-direction:column;gap:8px}
+    ul.bul li{position:relative;padding-left:20px;font-size:14.5px;color:var(--ink-2)}
+    ul.bul li::before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--gold-deep)}
+    .plate{display:flex;flex-direction:column;gap:11px}
+    .plate .row{display:flex;gap:12px}
+    .plate .row .lbl{flex:none;width:78px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700;padding-top:2px}
+    .plate .row .bd{font-size:14.5px;color:var(--ink-2)}
+    .principle{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:13px 14px;margin:12px 0;font-size:14px;color:var(--ink-2)}
+    .principle b{color:var(--gold);font-weight:700}
+    .check li::before{content:"";border-radius:3px;background:transparent;border:2px solid var(--gold-deep);width:13px;height:13px;top:4px;left:0}
+    ul.check li{padding-left:24px}
+    .seed{background:linear-gradient(180deg,rgba(201,169,110,.10),rgba(201,169,110,.03));border:1px solid var(--gold-deep)}
+    .seed h2{color:var(--gold)}
+    .cta{display:block;text-align:center;background:var(--gold);color:#1a1408;font-weight:800;font-size:15.5px;
+      padding:16px;border-radius:14px;text-decoration:none;margin-top:6px}
+    .cta:hover{filter:brightness(1.07)}
+    .savehint{text-align:center;font-size:12.5px;color:var(--ink-3);margin:18px 0 4px}
+    .restart{display:block;width:100%;text-align:center;background:transparent;border:none;color:var(--ink-3);
+      font-family:inherit;font-size:13px;text-decoration:underline;cursor:pointer;margin-top:14px;padding:8px}
+    .err{color:var(--red);font-size:13px;margin-top:10px;display:none}
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ INTAKE ============ -->
+  <div id="intake">
+    <div class="progress"><i id="bar"></i></div>
+
+    <!-- 1: name -->
+    <section class="screen active" data-screen="0">
+      <div class="eyebrow q-eyebrow">The Forge · Summer Shred</div>
+      <div class="q-title">Let's build your roadmap.</div>
+      <div class="q-sub">Five quick questions. Then you get a 6-week plan built around you, not a generic PDF. Takes about a minute.</div>
+      <label class="sub-label">First name</label>
+      <input class="field" id="firstName" type="text" autocomplete="given-name" placeholder="Your first name" />
+    </section>
+
+    <!-- 2: why -->
+    <section class="screen" data-screen="1">
+      <div class="eyebrow q-eyebrow">Step 2 of 5</div>
+      <div class="q-title">Why now?</div>
+      <div class="q-sub">What do you want out of the next 6 weeks, and why does it matter right now? One or two lines, the way you'd text a friend. This is what makes the roadmap yours.</div>
+      <textarea class="field" id="why" placeholder="e.g. I'm tired of avoiding photos. I want to feel strong again before my kid's birthday in August."></textarea>
+    </section>
+
+    <!-- 3: derailer -->
+    <section class="screen" data-screen="2">
+      <div class="eyebrow q-eyebrow">Step 3 of 5</div>
+      <div class="q-title">Where do you usually fall off?</div>
+      <div class="q-sub">Be honest. This is the part the roadmap has to protect you from.</div>
+      <div class="opts" data-q="derailer">
+        <button class="opt" data-v="fade"><span class="dot"></span>I start strong, then fade by week two</button>
+        <button class="opt" data-v="alone"><span class="dot"></span>I do it alone and lose steam</button>
+        <button class="opt" data-v="night"><span class="dot"></span>Nights / stress eating undo my whole day</button>
+        <button class="opt" data-v="time"><span class="dot"></span>I run out of time, life gets busy</button>
+        <button class="opt" data-v="discipline"><span class="dot"></span>I know what to do, I just don't do it</button>
+      </div>
+    </section>
+
+    <!-- 4: training reality -->
+    <section class="screen" data-screen="3">
+      <div class="eyebrow q-eyebrow">Step 4 of 5</div>
+      <div class="q-title">Your training reality.</div>
+      <div class="q-sub">We build the plan around the time you actually have, not the time you wish you had.</div>
+      <label class="sub-label">Days per week you can realistically train</label>
+      <div class="pair" data-q="days">
+        <button class="opt" data-v="2">2–3 days</button>
+        <button class="opt" data-v="4">3–4 days</button>
+        <button class="opt" data-v="5">5–6 days</button>
+        <button class="opt" data-v="home0">I'll decide later</button>
+      </div>
+      <label class="sub-label">Where</label>
+      <div class="pair" data-q="location">
+        <button class="opt" data-v="gym">Gym</button>
+        <button class="opt" data-v="home">Home</button>
+      </div>
+    </section>
+
+    <!-- 5: eating + starting -->
+    <section class="screen" data-screen="4">
+      <div class="eyebrow q-eyebrow">Step 5 of 5</div>
+      <div class="q-title">Food + where you're starting.</div>
+      <div class="q-sub">Last one.</div>
+      <label class="sub-label">Your eating weak spot</label>
+      <div class="opts" data-q="eating">
+        <button class="opt" data-v="nights"><span class="dot"></span>Late-night snacking</button>
+        <button class="opt" data-v="weekends"><span class="dot"></span>Weekends wreck the week</button>
+        <button class="opt" data-v="nocook"><span class="dot"></span>No time to cook, I grab whatever</button>
+        <button class="opt" data-v="portions"><span class="dot"></span>Portions — I eat clean but too much</button>
+      </div>
+      <label class="sub-label">Where you're starting</label>
+      <div class="opts" data-q="start">
+        <button class="opt" data-v="new"><span class="dot"></span>Basically starting from scratch</button>
+        <button class="opt" data-v="restart"><span class="dot"></span>Restarting after a break</button>
+        <button class="opt" data-v="consistent"><span class="dot"></span>Already fairly consistent</button>
+      </div>
+    </section>
+
+    <div class="err" id="err">Pick an answer to keep going.</div>
+    <div class="nav">
+      <button class="btn btn-ghost" id="back" style="display:none">Back</button>
+      <button class="btn btn-primary" id="next">Next</button>
+    </div>
+  </div>
+
+  <!-- ============ ROADMAP OUTPUT ============ -->
+  <div id="roadmap" class="road"></div>
+
+</div>
+
+<script>
+/* ===================================================================
+   The Forge — Custom Summer Shred Roadmap
+   100% client-side. No AI, no API. Answers pick preset blocks; JS
+   stitches them. Output is identical every time for the same answers.
+   =================================================================== */
+
+// TODO(config): drop the real Skool group URL here.
+const SKOOL_URL = "https://www.skool.com/";
+
+const TOTAL = 5;
+const answers = { firstName:"", why:"", derailer:"", days:"", location:"", eating:"", start:"" };
+let screen = 0;
+
+/* ---------- intake wiring ---------- */
+const bar = document.getElementById("bar");
+const errEl = document.getElementById("err");
+const backBtn = document.getElementById("back");
+const nextBtn = document.getElementById("next");
+
+document.querySelectorAll(".opts, .pair").forEach(group => {
+  const q = group.getAttribute("data-q");
+  group.querySelectorAll(".opt").forEach(btn => {
+    btn.addEventListener("click", () => {
+      group.querySelectorAll(".opt").forEach(b => b.classList.remove("sel"));
+      btn.classList.add("sel");
+      answers[q] = btn.getAttribute("data-v");
+      hideErr();
+    });
+  });
+});
+document.getElementById("firstName").addEventListener("input", e => { answers.firstName = e.target.value.trim(); hideErr(); });
+document.getElementById("why").addEventListener("input", e => { answers.why = e.target.value.trim(); hideErr(); });
+
+function hideErr(){ errEl.style.display = "none"; }
+function showErr(msg){ errEl.textContent = msg; errEl.style.display = "block"; }
+
+function paint(){
+  document.querySelectorAll(".screen").forEach(s => s.classList.toggle("active", +s.dataset.screen === screen));
+  bar.style.width = ((screen) / TOTAL * 100) + "%";
+  backBtn.style.display = screen === 0 ? "none" : "block";
+  nextBtn.textContent = screen === TOTAL - 1 ? "Build my roadmap" : "Next";
+  window.scrollTo({ top:0, behavior:"smooth" });
+}
+
+function validate(){
+  if (screen === 0 && !answers.firstName) return "Add your first name to start.";
+  if (screen === 1 && answers.why.length < 3) return "Tell me your why — even one line.";
+  if (screen === 2 && !answers.derailer) return "Pick where you usually fall off.";
+  if (screen === 3 && (!answers.days || !answers.location)) return "Pick your days and where you'll train.";
+  if (screen === 4 && (!answers.eating || !answers.start)) return "Pick your food weak spot and starting point.";
+  return null;
+}
+
+nextBtn.addEventListener("click", () => {
+  const v = validate();
+  if (v) return showErr(v);
+  if (screen < TOTAL - 1){ screen++; paint(); }
+  else build();
+});
+backBtn.addEventListener("click", () => { if (screen > 0){ screen--; paint(); } });
+
+/* ===================================================================
+   CONTENT LIBRARY — the presets. Edit copy here; logic never changes.
+   =================================================================== */
+const C = {
+  // The honest read of where they are (validating).
+  startingLine: {
+    new: "You're starting close to zero, and that's the best place to be honest about it. The goal for you is not intensity, it's becoming someone who shows up. Small and repeatable beats big and gone by Friday.",
+    restart: "You've done this before, which means you already know how. This isn't a knowledge problem, it's a momentum problem. We rebuild the streak first and let strength follow it.",
+    consistent: "You already move. So your 6 weeks aren't about starting, they're about sharpening — tightening food, adding a little progression, and removing the one leak that keeps you from leaner."
+  },
+
+  // The derailer → the Atomic Habits fix. principle is accurate + brief.
+  fix: {
+    fade: {
+      name: "You start strong, then fade.",
+      diag: "The fast start is the trap. Motivation is highest on day one and falls every day after, so a plan built on motivation always dies around week two.",
+      principle: "<b>The rule that beats it: never miss twice.</b> Missing one day is an accident. Missing two is the start of a new habit. You don't need to be perfect, you just need to never let one skipped day become two.",
+      moves: [
+        "Put your training days in your calendar as fixed appointments, not 'when I get to it.'",
+        "If you miss a day, the only rule is the next day is non-negotiable. Never miss twice."
+      ]
+    },
+    alone: {
+      name: "You do it alone, and lose steam.",
+      diag: "Willpower is a private battle and it's a fair fight at best. The people who finish almost never do it on willpower — they do it because someone was watching.",
+      principle: "<b>The principle: accountability is a commitment device.</b> When someone expects you to show up, follow-through stops depending on how you feel. It's the single biggest predictor of who finishes.",
+      moves: [
+        "Grab one accountability buddy this week — a friend, your partner, anyone — and send them your training days. Report after each one.",
+        "Post your check-in in the challenge group daily. Being seen is the mechanism, not the motivation."
+      ]
+    },
+    night: {
+      name: "Nights and stress eating undo your day.",
+      diag: "You don't have a discipline problem at 9pm. You have an environment problem. By night your willpower is spent, so whatever is easy to reach wins.",
+      principle: "<b>The principle: make the bad habit hard, make the good one easy (environment design).</b> You don't out-discipline a kitchen full of trigger food — you remove it so the choice is made before you're tired.",
+      moves: [
+        "Clear the house of the one food you binge. If it's not there at 9pm, willpower never gets tested.",
+        "Pre-decide your night move — a high-protein snack and a glass of water — so there's no decision to lose."
+      ]
+    },
+    time: {
+      name: "You run out of time.",
+      diag: "'No time' is almost never about hours — it's about the workout being a big scary block you have to find. Big blocks get skipped. Tiny starts don't.",
+      principle: "<b>The principle: the 2-minute rule + habit stacking.</b> Shrink the start until it's impossible to say no, and attach it to something you already do every day. Showing up beats the perfect session.",
+      moves: [
+        "Make the bar 'change clothes and start' — 2 minutes. You'll almost always keep going; on the worst days, 10 minutes still counts.",
+        "Stack training onto an anchor you never skip (after the morning coffee, right after work) so it rides an existing habit."
+      ]
+    },
+    discipline: {
+      name: "You know what to do — you just don't do it.",
+      diag: "The gap isn't information, it's identity. You're still 'someone trying to get in shape,' and that person negotiates every morning. People who don't negotiate have decided who they are.",
+      principle: "<b>The principle: identity-based habits.</b> Every action is a vote for the type of person you are. You don't need to feel like training — you need to become the kind of man who trains, one rep of proof at a time.",
+      moves: [
+        "Pick the identity: 'I'm someone who trains.' Then cast one vote for it today, however small.",
+        "Make it obvious — lay your clothes out the night before so the decision is already made when you wake up."
+      ]
+    }
+  },
+
+  // Sample day of eating tuned to the weak spot. Protein-first, simple.
+  plate: {
+    nights: [
+      ["Morning","Protein first — eggs or a shake. A real breakfast kills the 9pm hunger before it starts."],
+      ["Midday","A plate you can build fast: protein, veg, a fist of carbs. Don't arrive home starving."],
+      ["Evening","Eat enough at dinner that you're full. Then your pre-decided night snack: Greek yogurt or a protein, and water."],
+      ["The save","The binge isn't hunger, it's the unstructured hour. Give that hour a job — tea, a walk, anything but the pantry."]
+    ],
+    weekends: [
+      ["Weekdays","Lock in your simplest 3 meals. Boring and repeatable is the point."],
+      ["Weekend","Keep ONE planned treat meal you actually look forward to. Planned beats 'screw it.'"],
+      ["The rule","Don't let one meal become a lost weekend. Next meal is back on plan — never miss twice with food either."],
+      ["The save","Eat a real protein breakfast both weekend days. It anchors the whole day."]
+    ],
+    nocook: [
+      ["Morning","A shake or a grab-and-go protein. No cooking required."],
+      ["Midday","Rotisserie chicken, pre-cooked rice, a bagged salad — assembled, not cooked. 4 minutes."],
+      ["Evening","Repeat the assembly. Keep 2–3 'no-cook' combos on hand so 'nothing to eat' is never true."],
+      ["The rule","Protein at every meal is the one thing that matters most. Hit that and you're 80% there."]
+    ],
+    portions: [
+      ["The lever","You eat clean — the issue is amount. We don't ban food, we right-size it."],
+      ["Every plate","Half the plate veg, a palm of protein, a cupped hand of carbs, a thumb of fat. No scale needed."],
+      ["Slow down","Put the fork down between bites. Fullness lags 20 minutes — most overeating happens in that gap."],
+      ["The rule","One plate, no seconds for the first two weeks. Re-assess from there."]
+    ]
+  },
+
+  // First 3 moves — momentum, tuned a little by start.
+  firstMoves: {
+    base: [
+      "Block your training days in your calendar right now, before you close this.",
+      "Text one person your goal and your days — your accountability starts today."
+    ],
+    new: "Do the easiest possible first session today — even 15 minutes. The win is proving you started, not the workout.",
+    restart: "Do one session today exactly like you used to. You're not learning, you're remembering. Rebuild the streak.",
+    consistent: "Pick the ONE leak (usually food or sleep) and fix it this week. Your training's fine — tighten the edges."
+  }
+};
+
+/* ---------- phase builder (uses days + location + start) ---------- */
+function buildPhases(a){
+  const loc = a.location === "home" ? "at home" : "in the gym";
+  const days = a.days === "5" ? "5–6" : a.days === "4" ? "3–4" : a.days === "2" ? "2–3" : "3–4";
+  const lighter = a.start === "new";
+  return [
+    { h:"Weeks 1–2", tag:"Build the habit", bullets:[
+      `Run the challenge workout plan ${days} days ${loc}. ${lighter ? "Keep the weights light — the only goal right now is showing up every scheduled day." : "Leave a rep or two in the tank; we're building the streak, not maxing out."}`,
+      "Walk 7–8k steps a day. It's the most underrated fat-loss tool you already own.",
+      "One food rule only: protein at every meal. Don't change everything at once.",
+      "Sunday: a 2-minute check-in — photo, weight, and did you hit your days? That's your week."
+    ]},
+    { h:"Weeks 3–4", tag:"Add pressure", bullets:[
+      "Add weight or one set to the main lifts. Small progression, every week.",
+      "Tighten the diet plan: lock your meals, cut the one snack you know is the leak.",
+      "Hold the walks and the protein rule — they're now automatic, don't drop them.",
+      "Keep the Sunday check-in. Adjust based on what the numbers say, not how you feel."
+    ]},
+    { h:"Weeks 5–6", tag:"Finish hard", bullets:[
+      "Push intensity now that the habit is real — this is where the visible change lands.",
+      "Dial food in: same meals, slightly less, more steps if the scale stalls.",
+      "Take the same photo as week 1. Proof beats the mirror, which lies daily.",
+      "Decide before week 6 ends: what's the plan after the challenge? Momentum is the asset — don't waste it."
+    ]}
+  ];
+}
+
+/* ===================================================================
+   ASSEMBLE + RENDER
+   =================================================================== */
+function esc(s){ return String(s||"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+function build(){
+  // persist: encode answers to URL + device so the roadmap is a permalink.
+  try{
+    const enc = btoa(unescape(encodeURIComponent(JSON.stringify(answers))));
+    localStorage.setItem("forge-roadmap", enc);
+    history.replaceState(null, "", "?d=" + enc);
+  }catch(e){}
+  render(answers);
+}
+
+function render(a){
+  const name = esc(a.firstName) || "Your";
+  const fix = C.fix[a.derailer] || C.fix.fade;
+  const phases = buildPhases(a);
+  const plate = C.plate[a.eating] || C.plate.portions;
+  const moves = [ ...C.firstMoves.base, C.firstMoves[a.start] || C.firstMoves.new ];
+
+  const html = `
+    <div class="road-hero">
+      <div class="eyebrow">The Forge · Your Roadmap</div>
+      <h1>${name}'s 6-Week<br/>Summer Shred Roadmap</h1>
+      <div class="goal">Built from your answers · screenshot it to keep it</div>
+    </div>
+
+    <div class="sec">
+      <h2>Your why — don't lose it</h2>
+      <div class="quote">${esc(a.why)}</div>
+      <p>Tape that to the mirror. Every plan below works only because that reason is real. When week 2 gets hard, you don't need more motivation — you need to re-read that line.</p>
+    </div>
+
+    <div class="sec">
+      <h2>Your starting line</h2>
+      <p>${C.startingLine[a.start] || C.startingLine.new}</p>
+    </div>
+
+    <div class="sec">
+      <h2>Your 6 weeks</h2>
+      ${phases.map(p => `
+        <div class="phase">
+          <div class="ph-h"><span>${p.h}</span>${p.tag}</div>
+          <ul class="bul">${p.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
+        </div>`).join("")}
+    </div>
+
+    <div class="sec">
+      <h2>A simple day on a plate</h2>
+      <div class="plate">
+        ${plate.map(r => `<div class="row"><div class="lbl">${r[0]}</div><div class="bd">${r[1]}</div></div>`).join("")}
+      </div>
+    </div>
+
+    <div class="sec">
+      <h2>Why you've fallen off — and the fix</h2>
+      <p><strong>${fix.name}</strong></p>
+      <p>${fix.diag}</p>
+      <div class="principle">${fix.principle}</div>
+      <p style="margin-bottom:8px"><strong>Do this:</strong></p>
+      <ul class="bul">${fix.moves.map(m => `<li>${m}</li>`).join("")}</ul>
+    </div>
+
+    <div class="sec">
+      <h2>Your first 3 moves — today</h2>
+      <ul class="check">${moves.map(m => `<li>${m}</li>`).join("")}</ul>
+    </div>
+
+    <div class="sec seed">
+      <h2>The honest part</h2>
+      <p>This roadmap gives you the system. But a plan on a screen can't text you when you skip, can't adjust when life blows up your week, and can't pull you back the day after you fall off — and that day is exactly where most people quit for good.</p>
+      <p>For now, lean on the challenge group for that. Post your wins, post your misses, let people see you. When you decide you want that certainty — someone in your corner every day so finishing isn't left to willpower — that's what a coach is.</p>
+      <a class="cta" href="${SKOOL_URL}">Jump into the challenge group →</a>
+      <div class="savehint">📸 Screenshot this page to keep your roadmap.</div>
+    </div>
+
+    <button class="restart" id="restart">Start over with different answers</button>
+  `;
+
+  const road = document.getElementById("roadmap");
+  road.innerHTML = html;
+  document.getElementById("intake").style.display = "none";
+  road.classList.add("active");
+  window.scrollTo({ top:0, behavior:"instant" in window ? "instant" : "auto" });
+  document.getElementById("restart").addEventListener("click", () => {
+    try{ localStorage.removeItem("forge-roadmap"); }catch(e){}
+    history.replaceState(null, "", location.pathname);
+    location.reload();
+  });
+}
+
+/* ---------- on load: if a roadmap is encoded in the URL/device, show it ---------- */
+(function init(){
+  let enc = new URLSearchParams(location.search).get("d");
+  if (!enc){ try{ enc = localStorage.getItem("forge-roadmap"); }catch(e){} }
+  if (enc){
+    try{
+      const a = JSON.parse(decodeURIComponent(escape(atob(enc))));
+      if (a && a.derailer){ render(a); return; }
+    }catch(e){}
+  }
+  paint();
+})();
+</script>
+</body>
+</html>
