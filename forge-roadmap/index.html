@@ -91,6 +91,29 @@
     .restart{display:block;width:100%;text-align:center;background:transparent;border:none;color:var(--ink-3);
       font-family:inherit;font-size:13px;text-decoration:underline;cursor:pointer;margin-top:14px;padding:8px}
     .err{color:var(--red);font-size:13px;margin-top:10px;display:none}
+
+    /* ---------- polish ---------- */
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(120% 55% at 50% -8%, rgba(201,169,110,.12), transparent 62%)}
+    .wrap{position:relative;z-index:1}
+    @keyframes rise{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+    #roadmap.active .road-hero,#roadmap.active .note,#roadmap.active .sec,#roadmap.active .restart{
+      opacity:0;animation:rise .55s cubic-bezier(.2,.7,.2,1) forwards}
+    .road-hero h1{background:linear-gradient(180deg,#fff,#cfcfd6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .chips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:15px}
+    .chip{font-size:10.5px;font-weight:600;letter-spacing:.02em;color:var(--gold);background:var(--gold-soft);
+      border:1px solid rgba(201,169,110,.28);border-radius:99px;padding:6px 11px}
+    .note{display:flex;gap:11px;align-items:flex-start;border:1px dashed var(--line);border-radius:13px;padding:14px 15px;margin-bottom:14px}
+    .note .nh{font-size:13.5px;color:var(--ink-2);line-height:1.55}
+    .note .nh b{color:var(--ink)}
+    .sec h2 .ix{color:var(--gold-deep);margin-right:9px;font-weight:700;-webkit-text-fill-color:initial}
+    .sec{transition:border-color .2s}
+    .sec:active{border-color:var(--gold-deep)}
+    .cta{transition:transform .12s,filter .15s}
+    .cta:active{transform:scale(.98)}
+    .cta.ig{background:transparent;color:var(--gold);border:1px solid var(--gold-deep);box-shadow:none}
+    .cta.ig:hover{background:var(--gold-soft);filter:none}
+    .close-lead{font-size:15.5px;color:var(--ink);line-height:1.5;margin-bottom:12px;font-weight:600}
   </style>
 </head>
 <body>
@@ -189,8 +212,9 @@
    stitches them. Output is identical every time for the same answers.
    =================================================================== */
 
-// TODO(config): drop the real Skool group URL here.
+// TODO(config): drop the real Skool group URL + Tyson's Instagram here.
 const SKOOL_URL = "https://www.skool.com/";
+const TYSON_IG = "https://instagram.com/"; // e.g. https://instagram.com/<tyson_handle>. "DM me ROADMAP" should be wired as a ManyChat keyword so these leads attribute.
 
 const TOTAL = 5;
 const answers = { firstName:"", why:"", derailer:"", days:"", location:"", eating:"", start:"" };
@@ -394,25 +418,38 @@ function render(a){
   const moves = [ ...C.firstMoves.base, C.firstMoves[a.start] || C.firstMoves.new ];
 
   const html = `
-    <div class="road-hero">
-      <div class="eyebrow">The Forge · Your Roadmap</div>
-      <h1>${name}'s 6-Week<br/>Summer Shred Roadmap</h1>
-      <div class="goal">Built from your answers · screenshot it to keep it</div>
+    <div class="road-hero" style="animation-delay:0ms">
+      <div class="eyebrow">The Forge · Built for ${name}</div>
+      <h1>Your 6-Week<br/>Summer Shred Roadmap</h1>
+      <div class="goal">Personalized from your answers · screenshot it to keep it</div>
+      <div class="chips">
+        <span class="chip">Your why</span>
+        <span class="chip">6-week plan</span>
+        <span class="chip">Eating blueprint</span>
+        <span class="chip">Your #1 fix</span>
+        <span class="chip">First moves</span>
+      </div>
     </div>
 
-    <div class="sec">
-      <h2>Your why — don't lose it</h2>
+    <div class="note" style="animation-delay:60ms">
+      <div class="nh"><b>Read this first.</b> This roadmap is intentionally simple — that's the point. The win isn't more information, it's going deep on these few things and actually doing them. The answer is almost always simpler than we make it. Don't add to this. Just run it.</div>
+    </div>
+
+    <div class="sec" style="animation-delay:120ms">
+      <h2>Your why — keep this close</h2>
       <div class="quote">${esc(a.why)}</div>
-      <p>Tape that to the mirror. Every plan below works only because that reason is real. When week 2 gets hard, you don't need more motivation — you need to re-read that line.</p>
+      <p>Tape that to the mirror. Everything below only works because that reason is real. When week 2 gets hard, you won't need more motivation — you'll need to re-read that line.</p>
     </div>
 
-    <div class="sec">
-      <h2>Your starting line</h2>
+    <div class="sec" style="animation-delay:180ms">
+      <h2><span class="ix">01</span>Your read</h2>
+      <p>Here's the honest read on where you're starting — and the one thing to lock onto:</p>
       <p>${C.startingLine[a.start] || C.startingLine.new}</p>
     </div>
 
-    <div class="sec">
-      <h2>Your 6 weeks</h2>
+    <div class="sec" style="animation-delay:240ms">
+      <h2><span class="ix">02</span>Your 6-week plan</h2>
+      <p>Exactly how to run your challenge workout + diet plan, paced to your real schedule:</p>
       ${phases.map(p => `
         <div class="phase">
           <div class="ph-h"><span>${p.h}</span>${p.tag}</div>
@@ -420,15 +457,16 @@ function render(a){
         </div>`).join("")}
     </div>
 
-    <div class="sec">
-      <h2>A simple day on a plate</h2>
+    <div class="sec" style="animation-delay:300ms">
+      <h2><span class="ix">03</span>Your eating blueprint</h2>
+      <p>A simple day on a plate, built around your weak spot:</p>
       <div class="plate">
         ${plate.map(r => `<div class="row"><div class="lbl">${r[0]}</div><div class="bd">${r[1]}</div></div>`).join("")}
       </div>
     </div>
 
-    <div class="sec">
-      <h2>Why you've fallen off — and the fix</h2>
+    <div class="sec" style="animation-delay:360ms">
+      <h2><span class="ix">04</span>Your #1 fix</h2>
       <p><strong>${fix.name}</strong></p>
       <p>${fix.diag}</p>
       <div class="principle">${fix.principle}</div>
@@ -436,16 +474,21 @@ function render(a){
       <ul class="bul">${fix.moves.map(m => `<li>${m}</li>`).join("")}</ul>
     </div>
 
-    <div class="sec">
-      <h2>Your first 3 moves — today</h2>
+    <div class="sec" style="animation-delay:420ms">
+      <h2><span class="ix">05</span>Your first moves — today</h2>
       <ul class="check">${moves.map(m => `<li>${m}</li>`).join("")}</ul>
     </div>
 
-    <div class="sec seed">
-      <h2>The honest part</h2>
-      <p>This roadmap gives you the system. But a plan on a screen can't text you when you skip, can't adjust when life blows up your week, and can't pull you back the day after you fall off — and that day is exactly where most people quit for good.</p>
-      <p>For now, lean on the challenge group for that. Post your wins, post your misses, let people see you. When you decide you want that certainty — someone in your corner every day so finishing isn't left to willpower — that's what a coach is.</p>
+    <div class="sec seed" style="animation-delay:480ms">
+      <h2>The part nobody tells you</h2>
+      <p class="close-lead">You now have the whole map. Here's the truth most people need to hear.</p>
+      <p>The map was never your problem. You've had plans before. What's been missing has never been information — it's having someone who notices when you slip and won't let you quietly disappear.</p>
+      <p>A page can't do that. It can't see you go quiet on day 9. It can't move your training when your week blows up. It can't talk you back the night you want to quit — and that night is exactly where every past attempt died.</p>
+      <p>That's the entire job of a coach. Not more workouts, not more rules. <strong>One person in your corner, every single day,</strong> so finishing stops being something you white-knuckle alone.</p>
+      <p><strong>For now: use the group.</strong> Post your wins, post your misses, let people see you. Being seen is half the battle — and it's free.</p>
+      <p>And when you're ready to stop leaving this to willpower and actually lock it in — my DMs are open. No pitch, no pressure. Just tell me you're serious and I'll show you what doing this with a coach in your corner actually looks like.</p>
       <a class="cta" href="${SKOOL_URL}">Jump into the challenge group →</a>
+      <a class="cta ig" href="${TYSON_IG}">DM me "ROADMAP" on Instagram →</a>
       <div class="savehint">📸 Screenshot this page to keep your roadmap.</div>
     </div>
 
