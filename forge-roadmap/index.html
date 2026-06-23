@@ -194,8 +194,8 @@
     <section class="screen" data-screen="2">
       <div class="eyebrow q-eyebrow">Step 3 of 5</div>
       <div class="q-title">Where do you usually fall off?</div>
-      <div class="q-sub">Be honest. This is the part the roadmap has to protect you from.</div>
-      <div class="opts" data-q="derailer">
+      <div class="q-sub">Most people are a mix of a few of these, and that's normal. Pick the one or two that hit you hardest. Put your biggest first.</div>
+      <div class="opts" data-q="derailer" data-multi="2">
         <button class="opt" data-v="fade"><span class="dot"></span>I start strong, then fade by week two</button>
         <button class="opt" data-v="alone"><span class="dot"></span>I do it alone and lose steam</button>
         <button class="opt" data-v="night"><span class="dot"></span>Nights / stress eating undo my whole day</button>
@@ -228,8 +228,8 @@
       <div class="eyebrow q-eyebrow">Step 5 of 5</div>
       <div class="q-title">Food + where you're starting.</div>
       <div class="q-sub">Last one.</div>
-      <label class="sub-label">Your eating weak spot</label>
-      <div class="opts" data-q="eating">
+      <label class="sub-label">Your eating weak spot (pick one or two)</label>
+      <div class="opts" data-q="eating" data-multi="2">
         <button class="opt" data-v="nights"><span class="dot"></span>Late-night snacking</button>
         <button class="opt" data-v="weekends"><span class="dot"></span>Weekends wreck the week</button>
         <button class="opt" data-v="nocook"><span class="dot"></span>No time to cook, I grab whatever</button>
@@ -267,7 +267,7 @@ const SKOOL_URL = "https://www.skool.com/";
 const TYSON_IG = "https://instagram.com/"; // e.g. https://instagram.com/<tyson_handle>. "DM me ROADMAP" should be wired as a ManyChat keyword so these leads attribute.
 
 const TOTAL = 5;
-const answers = { firstName:"", why:"", derailer:"", days:"", location:"", eating:"", start:"" };
+const answers = { firstName:"", why:"", derailer:[], days:"", location:"", eating:[], start:"" };
 let screen = 0;
 
 /* ---------- intake wiring ---------- */
@@ -278,11 +278,29 @@ const nextBtn = document.getElementById("next");
 
 document.querySelectorAll(".opts, .pair").forEach(group => {
   const q = group.getAttribute("data-q");
+  const max = parseInt(group.getAttribute("data-multi") || "1", 10);
   group.querySelectorAll(".opt").forEach(btn => {
     btn.addEventListener("click", () => {
-      group.querySelectorAll(".opt").forEach(b => b.classList.remove("sel"));
-      btn.classList.add("sel");
-      answers[q] = btn.getAttribute("data-v");
+      const v = btn.getAttribute("data-v");
+      if (max === 1){
+        group.querySelectorAll(".opt").forEach(b => b.classList.remove("sel"));
+        btn.classList.add("sel");
+        answers[q] = v;
+      } else {
+        // Multi-select capped at `max`. Selecting past the cap drops the oldest pick.
+        let arr = Array.isArray(answers[q]) ? answers[q].slice() : [];
+        const i = arr.indexOf(v);
+        if (i > -1){ arr.splice(i, 1); btn.classList.remove("sel"); }
+        else {
+          if (arr.length >= max){
+            const removed = arr.shift();
+            const old = group.querySelector('.opt[data-v="' + removed + '"]');
+            if (old) old.classList.remove("sel");
+          }
+          arr.push(v); btn.classList.add("sel");
+        }
+        answers[q] = arr;
+      }
       hideErr();
     });
   });
@@ -304,9 +322,9 @@ function paint(){
 function validate(){
   if (screen === 0 && !answers.firstName) return "Add your first name to start.";
   if (screen === 1 && answers.why.length < 3) return "Tell me your why, even one line.";
-  if (screen === 2 && !answers.derailer) return "Pick where you usually fall off.";
+  if (screen === 2 && !answers.derailer.length) return "Pick the one or two that hit you hardest.";
   if (screen === 3 && (!answers.days || !answers.location)) return "Pick your days and where you'll train.";
-  if (screen === 4 && (!answers.eating || !answers.start)) return "Pick your food weak spot and starting point.";
+  if (screen === 4 && (!answers.eating.length || !answers.start)) return "Pick your food weak spot and starting point.";
   return null;
 }
 
@@ -343,6 +361,22 @@ const C = {
     night: "And I know exactly where your day falls apart. It isn't the morning, it's 9pm, when the willpower tank is empty and whatever's easy to grab wins. That's not a character flaw, it's biology, and it's beatable, just not with willpower at 9pm.",
     time: "And I know your real obstacle isn't laziness, it's that life is genuinely loud. The workout becomes a big block you can never quite fit, so it keeps sliding. We don't fix that with more discipline. We fix it by shrinking the block until it can't be skipped.",
     discipline: "And here's the honest one. You already know what to do, you've known for years, so this was never an information problem. It's an identity one: the quiet argument you have with yourself every morning. We're going to end that argument."
+  },
+
+  // Short phrase per derailer, used to name a SECOND pattern in the cold read.
+  coldBlend: {
+    fade: "lose the fire a couple weeks in",
+    alone: "drift the moment no one is watching",
+    night: "undo a good day after dark",
+    time: "get swallowed whole by a busy week",
+    discipline: "know exactly what to do and still not do it"
+  },
+  // Short phrase per eating weak spot, used to acknowledge a SECOND one.
+  eatingTip: {
+    nights: "late-night snacking",
+    weekends: "weekends running over the week",
+    nocook: "grabbing whatever when there's no time",
+    portions: "portions creeping up"
   },
 
   // The derailer → the Atomic Habits fix. principle is accurate + brief.
@@ -478,7 +512,13 @@ function build(){
 
 function render(a){
   const name = esc(a.firstName) || "Your";
-  const fix = C.fix[a.derailer] || C.fix.fade;
+
+  // Answers may be single values (old permalinks) or arrays (multi-select). Normalize both.
+  const dKeys = Array.isArray(a.derailer) ? a.derailer : (a.derailer ? [a.derailer] : []);
+  const eKeys = Array.isArray(a.eating) ? a.eating : (a.eating ? [a.eating] : []);
+  const dPrimary = dKeys[0] || "fade", dSecondary = dKeys[1] || null;
+  const ePrimary = eKeys[0] || "portions", eSecondary = eKeys[1] || null;
+  const fix = C.fix[dPrimary] || C.fix.fade;
   const phases = buildPhases(a);
 
   // Personal-but-computed: a real finish date 6 weeks out + their own workout count.
@@ -486,7 +526,7 @@ function render(a){
   const workouts = perWeek * 6;
   const _fd = new Date(); _fd.setDate(_fd.getDate() + 42);
   const finishDate = _fd.toLocaleDateString("en-US", { month: "long", day: "numeric" });
-  const plate = C.plate[a.eating] || C.plate.portions;
+  const plate = C.plate[ePrimary] || C.plate.portions;
   const moves = [ ...C.firstMoves.base, C.firstMoves[a.start] || C.firstMoves.new ];
 
   const foot = `<div class="p-foot">The Forge · Summer Shred</div>`;
@@ -532,7 +572,8 @@ function render(a){
       <div class="p-top"><span class="p-num">01</span><span class="p-kicker">Here's what I see</span></div>
       <div class="inner">
         <p class="body-lg">${C.coldStart[a.start] || C.coldStart.new}</p>
-        <p>${C.coldDerailer[a.derailer] || C.coldDerailer.fade}</p>
+        <p>${C.coldDerailer[dPrimary] || C.coldDerailer.fade}</p>
+        ${dSecondary ? `<p>And you're also the type to ${C.coldBlend[dSecondary]}. Those two feed each other, which is exactly why white-knuckling it never held for long.</p>` : ``}
         <p><strong>${name}, none of this means you're broken.</strong> It means the old approach was built wrong for you. Build it right and discipline stops being something you have to summon every morning.</p>
         <div class="principle">Six weeks from today is <b>${finishDate}</b>. At your pace that's about <b>${workouts} workouts</b> between now and a body that feels different. That's the whole game.</div>
       </div>${foot}
@@ -553,7 +594,7 @@ function render(a){
   panels.push(`
     <section class="panel">
       <div class="p-top"><span class="p-num">03</span><span class="p-kicker">Your eating blueprint</span></div>
-      <div class="inner"><div class="plate">${plate.map(r => `<div class="row"><div class="lbl">${r[0]}</div><div class="bd">${r[1]}</div></div>`).join("")}</div></div>${foot}
+      <div class="inner"><div class="plate">${plate.map(r => `<div class="row"><div class="lbl">${r[0]}</div><div class="bd">${r[1]}</div></div>`).join("")}</div>${eSecondary ? `<div class="principle">You also flagged ${C.eatingTip[eSecondary]}. Don't build a second plan for it. The same moves handle both: protein first, decide before you're tired, and never let one slip become two.</div>` : ``}</div>${foot}
     </section>`);
 
   // 04 Fix
@@ -583,9 +624,6 @@ function render(a){
         <p class="close-lead">You have the whole map now, ${name}. Here's the truth most people need to hear.</p>
         <p>The map was never the problem. You've had plans before. What's missing isn't information. It's having someone who notices when you slip, and won't let you quietly disappear.</p>
         <p>A page can't do that. It can't see you go quiet on day 9. It can't move your training when your week blows up. It can't talk you back the night you want to quit. And that night is exactly where every past attempt has died.</p>
-        <p>So when that night comes, do the one thing this page actually can do. Read your own words back:</p>
-        <div class="quote">"${esc(a.why)}"</div>
-        <p>You wrote that. It's still true. That's the reason to stay in it tonight.</p>
         <p>That's the whole job of a coach. Not more workouts. Not more rules. <strong>One person in your corner, every single day,</strong> so finishing isn't something you white-knuckle alone.</p>
         <p><strong>For now, lean on the group.</strong> Post your wins, post your misses, let people see you. Being seen is half the battle, and it's free.</p>
         <p>And when you're ready to stop leaving this to willpower and lock it in, my DMs are open. No pitch, no pressure. Just tell me you're serious, and I'll show you what doing this with a coach really looks like.</p>
