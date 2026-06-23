@@ -115,6 +115,39 @@
     .cta.ig{background:transparent;color:var(--gold);border:1px solid var(--gold-deep);box-shadow:none}
     .cta.ig:hover{background:var(--gold-soft);filter:none}
     .close-lead{font-size:15.5px;color:var(--ink);line-height:1.5;margin-bottom:12px;font-weight:600}
+
+    /* ===== Roadmap deck — full-screen swipe cards ===== */
+    .deck{position:fixed;inset:0;overflow-y:auto;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;background:var(--bg);z-index:20}
+    .panel{position:relative;min-height:100svh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;
+      padding:76px 26px 78px;max-width:540px;margin:0 auto;overflow:hidden}
+    .panel::before{content:"";position:absolute;left:50%;top:-12%;transform:translateX(-50%);width:150%;height:60%;
+      background:radial-gradient(closest-side, rgba(201,169,110,.14), transparent 70%);pointer-events:none}
+    .panel .inner{position:relative;z-index:1;width:100%;opacity:0;transform:translateY(22px);
+      transition:opacity .6s ease, transform .65s cubic-bezier(.2,.7,.2,1)}
+    .panel.inview .inner{opacity:1;transform:none}
+    .p-top{position:absolute;top:30px;left:26px;right:26px;display:flex;align-items:baseline;gap:13px;z-index:1}
+    .p-num{font-family:'Oswald',sans-serif;font-size:40px;font-weight:700;color:var(--gold);line-height:.8;-webkit-text-fill-color:initial}
+    .p-kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+    .p-foot{position:absolute;bottom:26px;left:26px;right:26px;text-align:center;font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+    .cover{text-align:center}
+    .cover .eyebrow{margin-bottom:20px}
+    .cover-title{font-family:'Oswald',sans-serif;font-size:46px;line-height:1;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+      background:linear-gradient(180deg,#fff,#c2c2cb);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px}
+    .cover-sub{font-size:15px;color:var(--ink-2);line-height:1.6;max-width:330px;margin:0 auto}
+    .scroll-hint{position:absolute;left:0;right:0;bottom:52px;text-align:center;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);animation:bob 1.8s ease-in-out infinite}
+    @keyframes bob{0%,100%{transform:translateY(0);opacity:.65}50%{transform:translateY(7px);opacity:1}}
+    .bigquote{font-family:'Oswald',sans-serif;font-size:27px;line-height:1.25;color:var(--ink);font-weight:500;border-left:3px solid var(--gold);padding-left:18px;margin-bottom:18px}
+    .lede{font-size:15px;color:var(--ink-3)}
+    .body-lg{font-size:20px;line-height:1.5;color:var(--ink)}
+    .phase-week{font-family:'Oswald',sans-serif;font-size:42px;font-weight:700;text-transform:uppercase;color:var(--ink);line-height:1;margin-bottom:7px}
+    .phase-tag{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:24px}
+    .fix-name{font-family:'Oswald',sans-serif;font-size:25px;font-weight:600;color:var(--ink);margin-bottom:13px;line-height:1.18}
+    .panel .cta{margin-top:18px}
+    .panel .restart{margin-top:8px}
+    .dots{position:fixed;right:11px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px;z-index:30}
+    .dots i{width:7px;height:7px;border-radius:50%;background:var(--line);transition:.25s;cursor:pointer}
+    .dots i.on{background:var(--gold);transform:scale(1.4)}
+    @media (max-width:380px){.cover-title{font-size:40px}.phase-week{font-size:36px}}
   </style>
 </head>
 <body>
@@ -418,86 +451,118 @@ function render(a){
   const plate = C.plate[a.eating] || C.plate.portions;
   const moves = [ ...C.firstMoves.base, C.firstMoves[a.start] || C.firstMoves.new ];
 
-  const html = `
-    <div class="road-hero" style="animation-delay:0ms">
-      <div class="eyebrow">The Forge · Built for ${name}</div>
-      <h1>Your 6-Week<br/>Summer Shred Roadmap</h1>
-      <div class="goal">Personalized from your answers · screenshot it to keep it</div>
-      <div class="chips">
-        <span class="chip">Your why</span>
-        <span class="chip">6-week plan</span>
-        <span class="chip">Eating blueprint</span>
-        <span class="chip">Your #1 fix</span>
-        <span class="chip">First moves</span>
+  const foot = `<div class="p-foot">The Forge · Summer Shred</div>`;
+  const panels = [];
+
+  // Cover
+  panels.push(`
+    <section class="panel cover">
+      <div class="inner">
+        <div class="eyebrow">The Forge · Summer Shred</div>
+        <h1 class="cover-title">${name}'s<br/>6-Week Shred<br/>Roadmap</h1>
+        <p class="cover-sub">Built from your answers. Keep it simple, go deep, and actually do it — the answer is simpler than you think.</p>
       </div>
-    </div>
+      <div class="scroll-hint">scroll ↓</div>
+      <div class="p-foot">📸 screenshot each card to keep it</div>
+    </section>`);
 
-    <div class="note" style="animation-delay:60ms">
-      <div class="nh"><b>Read this first.</b> This roadmap is intentionally simple — that's the point. The win isn't more information, it's going deep on these few things and actually doing them. The answer is almost always simpler than we make it. Don't add to this. Just run it.</div>
-    </div>
+  // Why
+  panels.push(`
+    <section class="panel">
+      <div class="p-top"><span class="p-kicker">Your why</span></div>
+      <div class="inner">
+        <div class="bigquote">${esc(a.why)}</div>
+        <p class="lede">Read this on the hard days. It's the reason you started.</p>
+      </div>${foot}
+    </section>`);
 
-    <div class="sec" style="animation-delay:120ms">
-      <h2>Your why — keep this close</h2>
-      <div class="quote">${esc(a.why)}</div>
-      <p>Read this on the hard days. It's the reason you started.</p>
-    </div>
+  // 01 Your read
+  panels.push(`
+    <section class="panel">
+      <div class="p-top"><span class="p-num">01</span><span class="p-kicker">Your read</span></div>
+      <div class="inner"><p class="body-lg">${C.startingLine[a.start] || C.startingLine.new}</p></div>${foot}
+    </section>`);
 
-    <div class="sec" style="animation-delay:180ms">
-      <h2><span class="ix">01</span>Your read</h2>
-      <p>${C.startingLine[a.start] || C.startingLine.new}</p>
-    </div>
+  // 02 Plan — one panel per phase
+  phases.forEach((p, i) => panels.push(`
+    <section class="panel">
+      <div class="p-top"><span class="p-num">02</span><span class="p-kicker">Your 6-week plan · ${i + 1}/3</span></div>
+      <div class="inner">
+        <div class="phase-week">${p.h}</div>
+        <div class="phase-tag">${p.tag}</div>
+        <ul class="bul">${p.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
+      </div>${foot}
+    </section>`));
 
-    <div class="sec" style="animation-delay:240ms">
-      <h2><span class="ix">02</span>Your 6-week plan</h2>
-      ${phases.map(p => `
-        <div class="phase">
-          <div class="ph-h"><span>${p.h}</span>${p.tag}</div>
-          <ul class="bul">${p.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
-        </div>`).join("")}
-    </div>
+  // 03 Eating
+  panels.push(`
+    <section class="panel">
+      <div class="p-top"><span class="p-num">03</span><span class="p-kicker">Your eating blueprint</span></div>
+      <div class="inner"><div class="plate">${plate.map(r => `<div class="row"><div class="lbl">${r[0]}</div><div class="bd">${r[1]}</div></div>`).join("")}</div></div>${foot}
+    </section>`);
 
-    <div class="sec" style="animation-delay:300ms">
-      <h2><span class="ix">03</span>Your eating blueprint</h2>
-      <div class="plate">
-        ${plate.map(r => `<div class="row"><div class="lbl">${r[0]}</div><div class="bd">${r[1]}</div></div>`).join("")}
+  // 04 Fix
+  panels.push(`
+    <section class="panel">
+      <div class="p-top"><span class="p-num">04</span><span class="p-kicker">Your #1 fix</span></div>
+      <div class="inner">
+        <h3 class="fix-name">${fix.name}</h3>
+        <p>${fix.diag}</p>
+        <div class="principle">${fix.principle}</div>
+        <ul class="bul">${fix.moves.map(m => `<li>${m}</li>`).join("")}</ul>
+      </div>${foot}
+    </section>`);
+
+  // 05 First moves
+  panels.push(`
+    <section class="panel">
+      <div class="p-top"><span class="p-num">05</span><span class="p-kicker">Your first moves — today</span></div>
+      <div class="inner"><ul class="check">${moves.map(m => `<li>${m}</li>`).join("")}</ul></div>${foot}
+    </section>`);
+
+  // Close — kept verbatim, Skool CTA only
+  panels.push(`
+    <section class="panel close">
+      <div class="p-top"><span class="p-kicker">The part nobody tells you</span></div>
+      <div class="inner">
+        <p class="close-lead">You now have the whole map. Here's the truth most people need to hear.</p>
+        <p>The map was never your problem. You've had plans before. What's been missing has never been information — it's having someone who notices when you slip and won't let you quietly disappear.</p>
+        <p>A page can't do that. It can't see you go quiet on day 9. It can't move your training when your week blows up. It can't talk you back the night you want to quit — and that night is exactly where every past attempt died.</p>
+        <p>That's the entire job of a coach. Not more workouts, not more rules. <strong>One person in your corner, every single day,</strong> so finishing stops being something you white-knuckle alone.</p>
+        <p><strong>For now: use the group.</strong> Post your wins, post your misses, let people see you. Being seen is half the battle — and it's free.</p>
+        <p>And when you're ready to stop leaving this to willpower and actually lock it in — my DMs are open. No pitch, no pressure. Just tell me you're serious and I'll show you what doing this with a coach in your corner actually looks like.</p>
+        <a class="cta" href="${SKOOL_URL}">Jump into the challenge group →</a>
+        <button class="restart" id="restart">Start over with different answers</button>
       </div>
-    </div>
+    </section>`);
 
-    <div class="sec" style="animation-delay:360ms">
-      <h2><span class="ix">04</span>Your #1 fix</h2>
-      <p><strong>${fix.name}</strong></p>
-      <p>${fix.diag}</p>
-      <div class="principle">${fix.principle}</div>
-      <p style="margin-bottom:8px"><strong>Do this:</strong></p>
-      <ul class="bul">${fix.moves.map(m => `<li>${m}</li>`).join("")}</ul>
-    </div>
-
-    <div class="sec" style="animation-delay:420ms">
-      <h2><span class="ix">05</span>Your first moves — today</h2>
-      <ul class="check">${moves.map(m => `<li>${m}</li>`).join("")}</ul>
-    </div>
-
-    <div class="sec seed" style="animation-delay:480ms">
-      <h2>The part nobody tells you</h2>
-      <p class="close-lead">You now have the whole map. Here's the truth most people need to hear.</p>
-      <p>The map was never your problem. You've had plans before. What's been missing has never been information — it's having someone who notices when you slip and won't let you quietly disappear.</p>
-      <p>A page can't do that. It can't see you go quiet on day 9. It can't move your training when your week blows up. It can't talk you back the night you want to quit — and that night is exactly where every past attempt died.</p>
-      <p>That's the entire job of a coach. Not more workouts, not more rules. <strong>One person in your corner, every single day,</strong> so finishing stops being something you white-knuckle alone.</p>
-      <p><strong>For now: use the group.</strong> Post your wins, post your misses, let people see you. Being seen is half the battle — and it's free.</p>
-      <p>And when you're ready to stop leaving this to willpower and actually lock it in — my DMs are open. No pitch, no pressure. Just tell me you're serious and I'll show you what doing this with a coach in your corner actually looks like.</p>
-      <a class="cta" href="${SKOOL_URL}">Jump into the challenge group →</a>
-      <a class="cta ig" href="${TYSON_IG}">DM me "ROADMAP" on Instagram →</a>
-      <div class="savehint">📸 Screenshot this page to keep your roadmap.</div>
-    </div>
-
-    <button class="restart" id="restart">Start over with different answers</button>
-  `;
+  const dots = panels.map((_, i) => `<i data-dot="${i}"></i>`).join("");
+  const html = `<div class="deck" id="deck">${panels.join("")}</div><div class="dots" id="dots">${dots}</div>`;
 
   const road = document.getElementById("roadmap");
   road.innerHTML = html;
   document.getElementById("intake").style.display = "none";
   road.classList.add("active");
-  window.scrollTo({ top:0, behavior:"instant" in window ? "instant" : "auto" });
+
+  // Full-screen deck: reveal each panel on scroll + drive the progress rail.
+  const deck = document.getElementById("deck");
+  const panelEls = Array.from(deck.querySelectorAll(".panel"));
+  const dotEls = Array.from(document.querySelectorAll("#dots i"));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add("inview");
+      if (e.intersectionRatio >= 0.5) {
+        const idx = panelEls.indexOf(e.target);
+        dotEls.forEach((d, i) => d.classList.toggle("on", i === idx));
+      }
+    });
+  }, { root: deck, threshold: [0.5] });
+  panelEls.forEach((p) => io.observe(p));
+  if (dotEls[0]) dotEls[0].classList.add("on");
+  dotEls.forEach((d, i) => d.addEventListener("click", () => panelEls[i].scrollIntoView({ behavior: "smooth" })));
+  deck.scrollTop = 0;
+
   document.getElementById("restart").addEventListener("click", () => {
     try{ localStorage.removeItem("forge-roadmap"); }catch(e){}
     history.replaceState(null, "", location.pathname);
