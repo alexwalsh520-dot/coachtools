@@ -329,6 +329,22 @@ const C = {
     consistent: "You already work out. So these 6 weeks are about small fixes: a little tighter on food, a little more weight each week, and fixing your one bad habit."
   },
 
+  // Cold-read opener, part 1: names where they are emotionally (by starting point).
+  coldStart: {
+    new: "You're starting close to zero, and that puts you further ahead than you think. No bad habits to unlearn, no old routine fighting the new one. Just a clean slate.",
+    restart: "You've done this before. You've felt this body fitter and stronger, so this was never about learning how. You already know how. This time it's about not stopping.",
+    consistent: "You're already in the gym most weeks, so you don't need motivation or the basics. You need the small, boring tweaks that turn 'in shape' into the best shape of your life."
+  },
+
+  // Cold-read opener, part 2: names their failure pattern as a system problem, not a willpower one (by derailer).
+  coldDerailer: {
+    fade: "And I already know your pattern. You start on fire, then watch it fade right around week two. That isn't weakness, it's what happens to anyone running on motivation, because motivation always runs out. So we won't build your plan on it.",
+    alone: "And I know how it usually ends. You go quiet, you drift, and nobody notices for weeks. Doing this alone is the hardest possible version of it. The people who finish rarely have more willpower, they just had someone watching.",
+    night: "And I know exactly where your day falls apart. It isn't the morning, it's 9pm, when the willpower tank is empty and whatever's easy to grab wins. That's not a character flaw, it's biology, and it's beatable, just not with willpower at 9pm.",
+    time: "And I know your real obstacle isn't laziness, it's that life is genuinely loud. The workout becomes a big block you can never quite fit, so it keeps sliding. We don't fix that with more discipline. We fix it by shrinking the block until it can't be skipped.",
+    discipline: "And here's the honest one. You already know what to do, you've known for years, so this was never an information problem. It's an identity one: the quiet argument you have with yourself every morning. We're going to end that argument."
+  },
+
   // The derailer → the Atomic Habits fix. principle is accurate + brief.
   fix: {
     fade: {
@@ -464,6 +480,12 @@ function render(a){
   const name = esc(a.firstName) || "Your";
   const fix = C.fix[a.derailer] || C.fix.fade;
   const phases = buildPhases(a);
+
+  // Personal-but-computed: a real finish date 6 weeks out + their own workout count.
+  const perWeek = a.days === "5" ? 5 : a.days === "2" ? 3 : 4;
+  const workouts = perWeek * 6;
+  const _fd = new Date(); _fd.setDate(_fd.getDate() + 42);
+  const finishDate = _fd.toLocaleDateString("en-US", { month: "long", day: "numeric" });
   const plate = C.plate[a.eating] || C.plate.portions;
   const moves = [ ...C.firstMoves.base, C.firstMoves[a.start] || C.firstMoves.new ];
 
@@ -504,11 +526,16 @@ function render(a){
       </div>${foot}
     </section>`);
 
-  // 01 Your read
+  // 01 The cold read — names their inner experience from start + derailer, then a real date.
   panels.push(`
     <section class="panel">
-      <div class="p-top"><span class="p-num">01</span><span class="p-kicker">Your read</span></div>
-      <div class="inner"><p class="body-lg">${C.startingLine[a.start] || C.startingLine.new}</p></div>${foot}
+      <div class="p-top"><span class="p-num">01</span><span class="p-kicker">Here's what I see</span></div>
+      <div class="inner">
+        <p class="body-lg">${C.coldStart[a.start] || C.coldStart.new}</p>
+        <p>${C.coldDerailer[a.derailer] || C.coldDerailer.fade}</p>
+        <p><strong>${name}, none of this means you're broken.</strong> It means the old approach was built wrong for you. Build it right and discipline stops being something you have to summon every morning.</p>
+        <div class="principle">Six weeks from today is <b>${finishDate}</b>. At your pace that's about <b>${workouts} workouts</b> between now and a body that feels different. That's the whole game.</div>
+      </div>${foot}
     </section>`);
 
   // 02 Plan — one panel per phase
@@ -553,9 +580,12 @@ function render(a){
     <section class="panel close">
       <div class="p-top"><span class="p-kicker">The part nobody tells you</span></div>
       <div class="inner">
-        <p class="close-lead">You have the whole map now. Here's the truth most people need to hear.</p>
+        <p class="close-lead">You have the whole map now, ${name}. Here's the truth most people need to hear.</p>
         <p>The map was never the problem. You've had plans before. What's missing isn't information. It's having someone who notices when you slip, and won't let you quietly disappear.</p>
         <p>A page can't do that. It can't see you go quiet on day 9. It can't move your training when your week blows up. It can't talk you back the night you want to quit. And that night is exactly where every past attempt has died.</p>
+        <p>So when that night comes, do the one thing this page actually can do. Read your own words back:</p>
+        <div class="quote">"${esc(a.why)}"</div>
+        <p>You wrote that. It's still true. That's the reason to stay in it tonight.</p>
         <p>That's the whole job of a coach. Not more workouts. Not more rules. <strong>One person in your corner, every single day,</strong> so finishing isn't something you white-knuckle alone.</p>
         <p><strong>For now, lean on the group.</strong> Post your wins, post your misses, let people see you. Being seen is half the battle, and it's free.</p>
         <p>And when you're ready to stop leaving this to willpower and lock it in, my DMs are open. No pitch, no pressure. Just tell me you're serious, and I'll show you what doing this with a coach really looks like.</p>
