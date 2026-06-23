@@ -7,7 +7,7 @@
   <title>Your Custom Summer Shred Roadmap</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Spectral:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root{
       --bg:#0c0c0f; --panel:#141418; --panel-2:#1b1b21; --line:#26262e;
@@ -20,7 +20,7 @@
     html{-webkit-text-size-adjust:100%}
     body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;padding:24px 16px 64px}
     .wrap{max-width:480px;margin:0 auto}
-    .display{font-family:'Spectral',Georgia,serif;letter-spacing:.3px;text-transform:uppercase}
+    .display{font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:.3px;text-transform:uppercase}
     .eyebrow{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:600}
 
     /* ---------- Intake ---------- */
@@ -62,7 +62,7 @@
     .road-hero h1{font-size:30px;font-weight:800;letter-spacing:-.6px;line-height:1.12;margin:10px 0 6px}
     .road-hero .goal{font-size:13.5px;color:var(--gold);font-weight:600}
     .sec{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 19px;margin-bottom:18px;box-shadow:var(--shadow)}
-    .sec h2{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:15px;font-family:'Spectral',Georgia,serif}
+    .sec h2{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:15px;font-family:'Plus Jakarta Sans',sans-serif}
     .sec p{font-size:15px;color:var(--ink-2);line-height:1.62;margin-bottom:11px}
     .sec p:last-child{margin-bottom:0}
     .sec strong{color:var(--ink);font-weight:600}
@@ -70,7 +70,7 @@
     .phase{padding:13px 0;border-top:1px solid var(--line)}
     .phase:first-of-type{border-top:none;padding-top:0}
     .phase .ph-h{font-weight:700;font-size:15px;margin-bottom:8px;color:var(--ink)}
-    .phase .ph-h span{color:var(--gold);font-family:'Spectral',Georgia,serif;letter-spacing:.04em;margin-right:8px}
+    .phase .ph-h span{color:var(--gold);font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:.04em;margin-right:8px}
     ul.bul{list-style:none;display:flex;flex-direction:column;gap:8px}
     ul.bul li{position:relative;padding-left:21px;font-size:15px;line-height:1.5;color:var(--ink-2)}
     ul.bul li::before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--gold-deep)}
@@ -119,36 +119,50 @@
     /* ===== Roadmap deck — full-screen swipe cards ===== */
     .deck{position:fixed;inset:0;overflow-y:auto;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;background:var(--bg);z-index:20}
     .panel{position:relative;min-height:100svh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;
-      padding:76px 26px 78px;max-width:540px;margin:0 auto;overflow:hidden}
+      padding:74px 44px 80px;max-width:540px;margin:0 auto;overflow:hidden}
     .panel::before{content:"";position:absolute;left:50%;top:-12%;transform:translateX(-50%);width:150%;height:60%;
-      background:radial-gradient(closest-side, rgba(201,169,110,.14), transparent 70%);pointer-events:none}
+      background:radial-gradient(closest-side, rgba(201,169,110,.14), transparent 70%);pointer-events:none;
+      animation:glowbreathe 7s ease-in-out infinite}
     .panel .inner{position:relative;z-index:1;width:100%;opacity:0;transform:translateY(22px);
       transition:opacity .6s ease, transform .65s cubic-bezier(.2,.7,.2,1)}
     .panel.inview .inner{opacity:1;transform:none}
-    .p-top{position:absolute;top:30px;left:26px;right:26px;display:flex;align-items:baseline;gap:13px;z-index:1}
-    .p-num{font-family:'Spectral',Georgia,serif;font-size:40px;font-weight:700;color:var(--gold);line-height:.8;-webkit-text-fill-color:initial}
+    .p-top{position:absolute;top:30px;left:28px;right:48px;display:flex;align-items:baseline;gap:13px;z-index:1}
+    .p-num{font-family:'Plus Jakarta Sans',sans-serif;font-size:40px;font-weight:700;color:var(--gold);line-height:.8;-webkit-text-fill-color:initial}
     .p-kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
-    .p-foot{position:absolute;bottom:26px;left:26px;right:26px;text-align:center;font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+    .p-foot{position:absolute;bottom:26px;left:44px;right:44px;text-align:center;font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
     .cover{text-align:center}
     .cover .eyebrow{margin-bottom:20px}
-    .cover-title{font-family:'Spectral',Georgia,serif;font-size:44px;line-height:1.1;font-weight:700;letter-spacing:-.3px;
+    .cover-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:42px;line-height:1.12;font-weight:800;letter-spacing:-1px;
       background:linear-gradient(180deg,#fff,#cbb78c);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:18px}
     .cover-sub{font-size:15px;color:var(--ink-2);line-height:1.6;max-width:330px;margin:0 auto}
     .scroll-hint{position:absolute;left:0;right:0;bottom:52px;text-align:center;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);animation:bob 1.8s ease-in-out infinite}
     @keyframes bob{0%,100%{transform:translateY(0);opacity:.65}50%{transform:translateY(7px);opacity:1}}
-    .bigquote{font-family:'Spectral',Georgia,serif;font-size:27px;line-height:1.25;color:var(--ink);font-weight:500;border-left:3px solid var(--gold);padding-left:18px;margin-bottom:18px}
+    .bigquote{font-family:'Plus Jakarta Sans',sans-serif;font-size:31px;line-height:1.24;color:var(--ink);font-weight:600;border-left:3px solid var(--gold);padding-left:20px;margin-bottom:18px}
+    .why-h{font-family:'Plus Jakarta Sans',sans-serif;font-size:40px;line-height:1.05;font-weight:800;letter-spacing:-1px;color:var(--ink);margin-bottom:20px}
+    .why-note{font-size:17px;line-height:1.6;color:var(--ink-2);margin-top:18px;max-width:30ch}
+    .simple-h{font-family:'Plus Jakarta Sans',sans-serif;font-size:30px;line-height:1.1;font-weight:800;letter-spacing:-.6px;color:var(--ink);margin-bottom:18px}
     .lede{font-size:15px;color:var(--ink-3)}
     .body-lg{font-size:20px;line-height:1.5;color:var(--ink)}
-    .phase-week{font-family:'Spectral',Georgia,serif;font-size:42px;font-weight:700;text-transform:uppercase;color:var(--ink);line-height:1;margin-bottom:7px}
+    .phase-week{font-family:'Plus Jakarta Sans',sans-serif;font-size:42px;font-weight:700;text-transform:uppercase;color:var(--ink);line-height:1;margin-bottom:7px}
     .phase-tag{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:24px}
-    .fix-name{font-family:'Spectral',Georgia,serif;font-size:25px;font-weight:600;color:var(--ink);margin-bottom:13px;line-height:1.18}
+    .fix-name{font-family:'Plus Jakarta Sans',sans-serif;font-size:25px;font-weight:600;color:var(--ink);margin-bottom:13px;line-height:1.18}
     .panel .cta{margin-top:18px}
     .panel .restart{margin-top:8px}
-    .questline{position:fixed;left:5px;top:0;z-index:30;pointer-events:none}
+    .questline{position:fixed;right:0;top:0;z-index:30;pointer-events:none}
     .qnode{fill:#23232b;stroke:#3a3a45;stroke-width:1;transition:fill .35s ease}
     .qnode.lit{fill:#c9a96e}
     #qhalo{animation:qpulse 1.9s ease-in-out infinite}
     @keyframes qpulse{0%,100%{opacity:.2}50%{opacity:.5}}
+    @keyframes glowbreathe{0%,100%{opacity:.82;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.08)}}
+    .bgfx{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+    .orb{position:absolute;border-radius:50%;filter:blur(64px)}
+    .orb1{width:62vw;height:62vw;left:-20vw;top:-12vh;background:radial-gradient(closest-side,rgba(201,169,110,.10),transparent 70%);animation:float1 19s ease-in-out infinite}
+    .orb2{width:52vw;height:52vw;right:-16vw;bottom:-8vh;background:radial-gradient(closest-side,rgba(201,169,110,.07),transparent 70%);animation:float2 24s ease-in-out infinite}
+    @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(7vw,5vh)}}
+    @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-6vw,-4vh)}}
+    .panel .inner p{font-size:16px;line-height:1.65;color:var(--ink-2);margin-bottom:13px}
+    .panel .inner p:last-child{margin-bottom:0}
+    .panel .inner p strong{color:var(--ink);font-weight:600}
     @media (max-width:380px){.cover-title{font-size:40px}.phase-week{font-size:36px}}
   </style>
 </head>
@@ -197,9 +211,9 @@
       <div class="q-sub">We build the plan around the time you actually have, not the time you wish you had.</div>
       <label class="sub-label">Days per week you can realistically train</label>
       <div class="pair" data-q="days">
-        <button class="opt" data-v="2">2–3 days</button>
-        <button class="opt" data-v="4">3–4 days</button>
-        <button class="opt" data-v="5">5–6 days</button>
+        <button class="opt" data-v="2">2-3 days</button>
+        <button class="opt" data-v="4">3-4 days</button>
+        <button class="opt" data-v="5">5-6 days</button>
         <button class="opt" data-v="home0">I'll decide later</button>
       </div>
       <label class="sub-label">Where</label>
@@ -219,7 +233,7 @@
         <button class="opt" data-v="nights"><span class="dot"></span>Late-night snacking</button>
         <button class="opt" data-v="weekends"><span class="dot"></span>Weekends wreck the week</button>
         <button class="opt" data-v="nocook"><span class="dot"></span>No time to cook, I grab whatever</button>
-        <button class="opt" data-v="portions"><span class="dot"></span>Portions — I eat clean but too much</button>
+        <button class="opt" data-v="portions"><span class="dot"></span>Portions. I eat clean but eat too much</button>
       </div>
       <label class="sub-label">Where you're starting</label>
       <div class="opts" data-q="start">
@@ -289,7 +303,7 @@ function paint(){
 
 function validate(){
   if (screen === 0 && !answers.firstName) return "Add your first name to start.";
-  if (screen === 1 && answers.why.length < 3) return "Tell me your why — even one line.";
+  if (screen === 1 && answers.why.length < 3) return "Tell me your why, even one line.";
   if (screen === 2 && !answers.derailer) return "Pick where you usually fall off.";
   if (screen === 3 && (!answers.days || !answers.location)) return "Pick your days and where you'll train.";
   if (screen === 4 && (!answers.eating || !answers.start)) return "Pick your food weak spot and starting point.";
@@ -367,66 +381,66 @@ const C = {
   // Sample day of eating tuned to the weak spot. Protein-first, simple.
   plate: {
     nights: [
-      ["Morning","Protein first — eggs or a shake. A real breakfast kills the 9pm hunger before it starts."],
-      ["Midday","A plate you can build fast: protein, veg, a fist of carbs. Don't arrive home starving."],
-      ["Evening","Eat enough at dinner that you're full. Then your pre-decided night snack: Greek yogurt or a protein, and water."],
-      ["The save","The binge isn't hunger, it's the unstructured hour. Give that hour a job — tea, a walk, anything but the pantry."]
+      ["Morning","Eat protein first thing. Eggs or a protein shake. A real breakfast stops the 9pm hunger before it starts."],
+      ["Lunch","Make it fast: meat or chicken, some veggies, and a fist of rice or potatoes."],
+      ["Dinner","Eat enough so you feel full. Then have one snack you picked ahead of time, like Greek yogurt, with a big glass of water."],
+      ["The fix","Late night eating is boredom, not real hunger. Give that hour a job: tea, a short walk, or just brush your teeth and you're done."]
     ],
     weekends: [
-      ["Weekdays","Lock in your simplest 3 meals. Boring and repeatable is the point."],
-      ["Weekend","Keep ONE planned treat meal you actually look forward to. Planned beats 'screw it.'"],
-      ["The rule","Don't let one meal become a lost weekend. Next meal is back on plan — never miss twice with food either."],
-      ["The save","Eat a real protein breakfast both weekend days. It anchors the whole day."]
+      ["Mon to Fri","Pick 3 easy meals and eat them every day. Boring is good. Boring works."],
+      ["Weekend","Plan one meal you love and look forward to. Planning it stops the 'I already messed up' spiral."],
+      ["The rule","If you eat bad once, the next meal is back to normal. One bad meal, not a bad weekend."],
+      ["Both days","Eat a big protein breakfast Saturday and Sunday. It keeps the whole day on track."]
     ],
     nocook: [
-      ["Morning","A shake or a grab-and-go protein. No cooking required."],
-      ["Midday","Rotisserie chicken, pre-cooked rice, a bagged salad — assembled, not cooked. 4 minutes."],
-      ["Evening","Repeat the assembly. Keep 2–3 'no-cook' combos on hand so 'nothing to eat' is never true."],
-      ["The rule","Protein at every meal is the one thing that matters most. Hit that and you're 80% there."]
+      ["Morning","A protein shake, or a grab and go protein. No cooking."],
+      ["Lunch","Buy a cooked rotisserie chicken, a bag of salad, and microwave rice. Put it on a plate. Four minutes."],
+      ["Dinner","Same idea. Grab cooked food and put it on a plate. No stove needed."],
+      ["The rule","Keep 2 or 3 easy no-cook meals in the fridge. Then 'there's nothing to eat' is never true."]
     ],
     portions: [
-      ["The lever","You eat clean — the issue is amount. We don't ban food, we right-size it."],
-      ["Every plate","Half the plate veg, a palm of protein, a cupped hand of carbs, a thumb of fat. No scale needed."],
-      ["Slow down","Put the fork down between bites. Fullness lags 20 minutes — most overeating happens in that gap."],
-      ["The rule","One plate, no seconds for the first two weeks. Re-assess from there."]
+      ["The issue","You eat healthy. You just eat too much. We're not cutting foods, only the amount."],
+      ["Every plate","Half the plate veggies. A palm of meat. One cupped handful of rice or potatoes. A thumb of fats like oil or cheese. No scale needed."],
+      ["Slow down","Put your fork down between bites. Your body needs about 20 minutes to feel full. Most overeating happens before then."],
+      ["The rule","One plate. No seconds for the first 2 weeks. Then see how you feel."]
     ]
   },
 
   // First 3 moves — momentum, tuned a little by start.
   firstMoves: {
     base: [
-      "Block your training days in your calendar right now, before you close this.",
-      "Text one person your goal and your days — your accountability starts today."
+      "Put your workout days in your phone right now, before you close this.",
+      "Text one person your goal and your days. Your accountability starts today."
     ],
-    new: "Do the easiest possible first session today — even 15 minutes. The win is proving you started, not the workout.",
-    restart: "Do one session today exactly like you used to. You're not learning, you're remembering. Rebuild the streak.",
-    consistent: "Pick the ONE leak (usually food or sleep) and fix it this week. Your training's fine — tighten the edges."
+    new: "Do one easy workout today. Even 15 minutes. Just start.",
+    restart: "Do one workout today, like you used to. You're not learning, you're remembering.",
+    consistent: "Pick your one weak spot, usually food or sleep, and fix that this week."
   }
 };
 
 /* ---------- phase builder (uses days + location + start) ---------- */
 function buildPhases(a){
   const loc = a.location === "home" ? "at home" : "in the gym";
-  const days = a.days === "5" ? "5–6" : a.days === "4" ? "3–4" : a.days === "2" ? "2–3" : "3–4";
+  const days = a.days === "5" ? "5-6" : a.days === "4" ? "3-4" : a.days === "2" ? "2-3" : "3-4";
   const lighter = a.start === "new";
   return [
-    { h:"Weeks 1–2", tag:"Build the habit", bullets:[
-      `Run the challenge workout plan ${days} days ${loc}. ${lighter ? "Keep the weights light — the only goal right now is showing up every scheduled day." : "Leave a rep or two in the tank; we're building the streak, not maxing out."}`,
-      "Walk 7–8k steps a day. It's the most underrated fat-loss tool you already own.",
-      "One food rule only: protein at every meal. Don't change everything at once.",
-      "Sunday: a 2-minute check-in — photo, weight, and did you hit your days? That's your week."
+    { h:"Weeks 1-2", tag:"Build the habit", bullets:[
+      `Do your challenge workout ${days} days a week, ${loc}. ${lighter ? "Go light. The only goal right now is to show up every day you planned." : "Don't go to failure. Stop a couple reps short. We're building the habit first."}`,
+      "Walk every day. Shoot for about 8,000 steps. It's the easiest fat loss there is.",
+      "One food rule: eat protein at every meal. That's it for now.",
+      "Every Sunday, take 2 minutes. Snap a photo, weigh in, and check if you hit your workouts."
     ]},
-    { h:"Weeks 3–4", tag:"Add pressure", bullets:[
-      "Add weight or one set to the main lifts. Small progression, every week.",
-      "Tighten the diet plan: lock your meals, cut the one snack you know is the leak.",
-      "Hold the walks and the protein rule — they're now automatic, don't drop them.",
-      "Keep the Sunday check-in. Adjust based on what the numbers say, not how you feel."
+    { h:"Weeks 3-4", tag:"Add a little", bullets:[
+      "Add a little weight, or one more set, to your main lifts. Just a bit more than last week.",
+      "Clean up food: stop buying the one snack you know hurts you, like chips or soda.",
+      "Keep walking every day. Keep protein at every meal. Don't drop these.",
+      "Keep the Sunday check-in. If the scale isn't moving, walk a little more."
     ]},
-    { h:"Weeks 5–6", tag:"Finish hard", bullets:[
-      "Push intensity now that the habit is real — this is where the visible change lands.",
-      "Dial food in: same meals, slightly less, more steps if the scale stalls.",
-      "Take the same photo as week 1. Proof beats the mirror, which lies daily.",
-      "Decide before week 6 ends: what's the plan after the challenge? Momentum is the asset — don't waste it."
+    { h:"Weeks 5-6", tag:"Finish hard", bullets:[
+      "Push harder in your workouts now. This is where you start to see it.",
+      "Eat the same meals, just a little less. Walk more if the scale stalls.",
+      "Take a photo in the same spot as week 1. Photos tell the truth. The mirror lies.",
+      "Before week 6 ends, pick your next move. Don't stop the day the challenge ends."
     ]}
   ];
 }
@@ -462,7 +476,7 @@ function render(a){
       <div class="inner">
         <div class="eyebrow">The Forge · Summer Shred</div>
         <h1 class="cover-title">${name}'s<br/>6-Week Shred<br/>Roadmap</h1>
-        <p class="cover-sub">Built from your answers. Keep it simple, go deep, and actually do it — the answer is simpler than you think.</p>
+        <p class="cover-sub">Built from your answers. Keep it simple, go deep, and actually do it. The answer is simpler than you think.</p>
       </div>
       <div class="scroll-hint">scroll ↓</div>
       <div class="p-foot">📸 screenshot each card to keep it</div>
@@ -471,10 +485,22 @@ function render(a){
   // Why
   panels.push(`
     <section class="panel">
-      <div class="p-top"><span class="p-kicker">Your why</span></div>
+      <div class="p-top"><span class="p-kicker">Remember this</span></div>
       <div class="inner">
+        <h2 class="why-h">Your why.</h2>
         <div class="bigquote">${esc(a.why)}</div>
-        <p class="lede">Read this on the hard days. It's the reason you started.</p>
+        <p class="why-note">Read this on the hard days. It's the reason you started, and it's the reason you'll finish.</p>
+      </div>${foot}
+    </section>`);
+
+  // How simple this is (intentionally short)
+  panels.push(`
+    <section class="panel">
+      <div class="p-top"><span class="p-kicker">Read this first</span></div>
+      <div class="inner">
+        <h2 class="simple-h">This is short on purpose.</h2>
+        <p>The thing standing between you and the result was never more information. You already know most of this. The win is going deep on a few simple things and actually doing them, every day, for six weeks.</p>
+        <p>So don't try to add to it. Read it, screenshot it, and run it. Simple and done beats perfect and never started.</p>
       </div>${foot}
     </section>`);
 
@@ -518,7 +544,7 @@ function render(a){
   // 05 First moves
   panels.push(`
     <section class="panel">
-      <div class="p-top"><span class="p-num">05</span><span class="p-kicker">Your first moves — today</span></div>
+      <div class="p-top"><span class="p-num">05</span><span class="p-kicker">Your first moves, today</span></div>
       <div class="inner"><ul class="check">${moves.map(m => `<li>${m}</li>`).join("")}</ul></div>${foot}
     </section>`);
 
@@ -527,18 +553,18 @@ function render(a){
     <section class="panel close">
       <div class="p-top"><span class="p-kicker">The part nobody tells you</span></div>
       <div class="inner">
-        <p class="close-lead">You now have the whole map. Here's the truth most people need to hear.</p>
-        <p>The map was never your problem. You've had plans before. What's been missing has never been information — it's having someone who notices when you slip and won't let you quietly disappear.</p>
-        <p>A page can't do that. It can't see you go quiet on day 9. It can't move your training when your week blows up. It can't talk you back the night you want to quit — and that night is exactly where every past attempt died.</p>
-        <p>That's the entire job of a coach. Not more workouts, not more rules. <strong>One person in your corner, every single day,</strong> so finishing stops being something you white-knuckle alone.</p>
-        <p><strong>For now: use the group.</strong> Post your wins, post your misses, let people see you. Being seen is half the battle — and it's free.</p>
-        <p>And when you're ready to stop leaving this to willpower and actually lock it in — my DMs are open. No pitch, no pressure. Just tell me you're serious and I'll show you what doing this with a coach in your corner actually looks like.</p>
+        <p class="close-lead">You have the whole map now. Here's the truth most people need to hear.</p>
+        <p>The map was never the problem. You've had plans before. What's missing isn't information. It's having someone who notices when you slip, and won't let you quietly disappear.</p>
+        <p>A page can't do that. It can't see you go quiet on day 9. It can't move your training when your week blows up. It can't talk you back the night you want to quit. And that night is exactly where every past attempt has died.</p>
+        <p>That's the whole job of a coach. Not more workouts. Not more rules. <strong>One person in your corner, every single day,</strong> so finishing isn't something you white-knuckle alone.</p>
+        <p><strong>For now, lean on the group.</strong> Post your wins, post your misses, let people see you. Being seen is half the battle, and it's free.</p>
+        <p>And when you're ready to stop leaving this to willpower and lock it in, my DMs are open. No pitch, no pressure. Just tell me you're serious, and I'll show you what doing this with a coach really looks like.</p>
         <a class="cta" href="${SKOOL_URL}">Jump into the challenge group →</a>
         <button class="restart" id="restart">Start over with different answers</button>
       </div>
     </section>`);
 
-  const html = `<div class="deck" id="deck">${panels.join("")}</div><svg class="questline" id="questline" aria-hidden="true"></svg>`;
+  const html = `<div class="deck" id="deck"><div class="bgfx" aria-hidden="true"><span class="orb orb1"></span><span class="orb orb2"></span></div>${panels.join("")}</div><svg class="questline" id="questline" aria-hidden="true"></svg>`;
 
   const road = document.getElementById("roadmap");
   road.innerHTML = html;
@@ -560,7 +586,7 @@ function render(a){
   const svg = document.getElementById("questline");
   let q = null;
   function buildQuest() {
-    const H = Math.round(window.innerHeight), W = 56, top = 46, bot = H - 46, span = bot - top, cx = W / 2, amp = 15;
+    const H = Math.round(window.innerHeight), W = 40, top = 46, bot = H - 46, span = bot - top, cx = W / 2, amp = 12;
     const d = `M ${cx} ${top} C ${cx - amp} ${top + span * 0.16}, ${cx + amp} ${top + span * 0.32}, ${cx} ${top + span * 0.48} S ${cx - amp} ${top + span * 0.74}, ${cx} ${top + span * 0.88} S ${cx + amp} ${bot - 2}, ${cx} ${bot}`;
     svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
     svg.style.width = W + "px"; svg.style.height = H + "px";
