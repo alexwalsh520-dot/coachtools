@@ -635,10 +635,13 @@ function render(a){
   });
 }
 
-/* ---------- on load: if a roadmap is encoded in the URL/device, show it ---------- */
+/* ---------- on load: always start at the questions ----------
+   A plain load (coachtools.vercel.app/forge-roadmap/) goes straight to the
+   intake. Only an explicit ?d= permalink — the shareable link build() writes —
+   reopens a finished roadmap. (We intentionally do NOT auto-restore from
+   localStorage, so a normal visit always begins with the questions.) */
 (function init(){
-  let enc = new URLSearchParams(location.search).get("d");
-  if (!enc){ try{ enc = localStorage.getItem("forge-roadmap"); }catch(e){} }
+  const enc = new URLSearchParams(location.search).get("d");
   if (enc){
     try{
       const a = JSON.parse(decodeURIComponent(escape(atob(enc))));
