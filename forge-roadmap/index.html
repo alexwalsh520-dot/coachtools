@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#0c0c0f" />
-  <title>Your Custom Summer Shred Roadmap</title>
+  <title>Your Custom Winter Arc Roadmap</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
@@ -175,7 +175,7 @@
 
     <!-- 1: name -->
     <section class="screen active" data-screen="0">
-      <div class="eyebrow q-eyebrow">The Forge · Summer Shred</div>
+      <div class="eyebrow q-eyebrow">The Forge · Winter Arc</div>
       <div class="q-title">Let's build your roadmap.</div>
       <div class="q-sub">Five quick questions. Then you get a 6-week plan built around you, not a generic PDF. Takes about a minute.</div>
       <label class="sub-label">First name</label>
@@ -257,7 +257,7 @@
 
 <script>
 /* ===================================================================
-   The Forge — Custom Summer Shred Roadmap
+   The Forge — Custom Winter Arc Roadmap
    100% client-side. No AI, no API. Answers pick preset blocks; JS
    stitches them. Output is identical every time for the same answers.
    =================================================================== */
@@ -529,14 +529,14 @@ function render(a){
   const plate = C.plate[ePrimary] || C.plate.portions;
   const moves = [ ...C.firstMoves.base, C.firstMoves[a.start] || C.firstMoves.new ];
 
-  const foot = `<div class="p-foot">The Forge · Summer Shred</div>`;
+  const foot = `<div class="p-foot">The Forge · Winter Arc</div>`;
   const panels = [];
 
   // Cover
   panels.push(`
     <section class="panel cover">
       <div class="inner">
-        <div class="eyebrow">The Forge · Summer Shred</div>
+        <div class="eyebrow">The Forge · Winter Arc</div>
         <h1 class="cover-title">${name}'s<br/>6-Week Shred<br/>Roadmap</h1>
         <p class="cover-sub">Built from your answers. Keep it simple, go deep, and actually do it. The answer is simpler than you think.</p>
       </div>
